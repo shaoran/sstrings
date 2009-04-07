@@ -10,3 +10,8 @@ config.*
 *.lo
 install-sh
 libtool
+Makefile.in
+aclocal.m4
+configure
+depcomp
+ltmain.sh
