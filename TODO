@@ -1,20 +1,19 @@
-For Version >= 1.0.3
+Now
+----
+For Version >= 2.0.1
 
-  - Try to implement a more efficient strrstr function
+  - Think about ss_string_append(string, string); what will happen if string->str is changed?
+  
+  - Ignore the new version 1.0.5 --> deprecated
 
-  - int sprintf(char *str, const char *format, ...);
-    ssprintf(char** buffer, const char* format, ...); /* not as complicated as sprintf
-
-  - try to add a structure and functions like C++ std::map<char*, void*>
-
-  - try to add functions that insert strings to a "safe string" at some position
-
-  - try to add functions that replace a substring with another substring or by giving its position.
-
-  - when functions like insertstring get a NULL string to be inserted, then return *buffer
-
-
+  - Prepare the new version 2.0.1. Create a new datatype ss_string and write functions for this.
+    Most useful ANSI C Function for char* must be implemented for ss_tring. New functions will be implemented 
+    as well.
+    
+  - Create a html documentation
+  
+  - try to add a structure and functions like C++ std::map<ss_string*, void*>
 
 For Version >= 0.0.2
   - change strsstr [BUG] [done v.0.0.2]
-  - chnage manual pages [BUG] [done v.0.0.2]
+  - change manual pages [BUG] [done v.0.0.2]

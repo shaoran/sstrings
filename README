@@ -1,7 +1,7 @@
 The Safe String Library
 =======================
 
-Version 1.0.3
+Version 2.0.1
 -------------
 
 1. What is sstrings?
@@ -15,12 +15,12 @@ begin working with their tasks when the memory allocation is successful.
 2. System specifications
 ------------------------
 
-This library should ne compiled by any ANSI C compiler. The configure
+This library should be compiled by any ANSI C compiler. The configure
 and Makefile.in files were created by the GNU Build System (autoconf,
 automake, etc) and will function with any POSIX System. Note: if you want
 to create a Windows Library, you have to create you own Makefiles that
 run with the Microsoft Visual Stdio. There is no warranty that this function
-unter Windows.
+under Windows.
 
 3. Documentation
 ----------------

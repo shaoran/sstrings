@@ -31,14 +31,14 @@
 .\" documentate this function because of the similarity to strstr- In fact
 .\" I wanted to create a function that behaves the same way. For more informations
 .\" about GNU visit http://www.gnu.org
-.TH "STRRSTR" "3" "July 2005" "Version 1.0.5" "Linux Programmer's Manual -- Safe Strings Library"
+.TH "STRRSTR" "3" "September 2006" "Version 2.0.1" "Linux Programmer's Manual -- Safe Strings Library"
 .SH NAME
 strrstr \- locate a substring
 .SH SYNOPSIS
 .nf
-.B #include <string.h>
+.B #include <sstrings2.h>
 
-.B Linking with -lsstrings
+.B Linking with -lsstrings2
 .sp
 .BI "char* strrstr(const char* " haystack ", const char* " needle );
 .fi
@@ -51,8 +51,7 @@ The \fBstrstr()\fP function returns a pointer to the beginning of the
 substring, or NULL if the substring is not found or one of \fIhaystack\fR and \fIneedle\fR
 is NULL.
 .SH BUGS
-I don't know about any bugs. But I would be very happy to know one if you find one. Please report bugs at
-pabloy@pcpool.mathematik.uni-freiburg.de
+Please send your bug reports to yanezp@informatik.uni-freiburg.de
 .SH "SEE ALSO"
 .BR index (3),
 .BR memchr (3),

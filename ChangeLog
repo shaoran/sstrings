@@ -1,20 +1,26 @@
 # Changelog for sstrings
-# Copyright Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
-# $HEADER: http://pcpool.mathematik.uni-freiburg.de/~pabloy/projects/sstrings/ChangeLog
+# Copyright Pablo Yanez Trujillo <yanezp@informatik.uni-freiburg.de>
+# $HEADER: http://klingsor.informatik.uni-freiburg.de/projects/sstrings/ChangeLog
 
-sstrings-1.0.5:
-Sat Oct 8 2005; Pablo Yanez Trujillo
-<pabloy@pcpool.mathematik.uni-freiburg.de>
-- test directory for `make check` added
+sstrings-2.0.1:
 
-Sat Oct 8 2005; Pablo Yanez Trujillo
-<pabloy@pcpool.mathematik.uni-freiburg.de>
-- Version 1.0.5 started
+Tue Nov 14 2006: Pablo Yanez Trujillo <yanezp@informatik.uni-freiburg.de>
+- man pages done
+- html doc done
+- release 2.0.1
+
+Thu Sep 14 2006: Pablo Yanez Trujillo <yanezp@informatik.uni-freiburg.de>
+- After a long pause I had some time to rewrite some new functions.
+I hope that it is now easier to use the library than all version =<2.x
+
+the first function for 2.0.1 release seem to be complete. Now we have
+to write the manual pages (and html pages)
+
+Sun Dec 18 2005
+- New Version 2.0.1 started. sstrings-1.x and >=sstrings-2.x won't be
+compatible. Versions sstrings-1.x are deprected. 
 
 sstrings-1.0.4:
-Sat Oct 8 2005; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
-- test directory for `make check` added
-
 Wed Jul 13 2005; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
 - Version 1.0.4 started
 
