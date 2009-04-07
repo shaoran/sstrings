@@ -1,0 +1,205 @@
+/* sstrings project CCS
+   used by: Reference manual
+   author: Pablo Yanez Trujillo <yanezp@informatik.uni-freiburg.de> */
+
+
+body
+{
+	background-color: #f0f0f0;
+	color: #000000;
+}
+
+#content
+{
+	padding-top: 0px;
+	position: relative;
+	border-width: 4px;
+	border-style: double;
+	border-color: #0065ff;
+	left: 5%;
+	width: 90%;
+
+	background-color: #ffffff;
+	color: #000000;
+}
+
+#w3c
+{
+	padding-top: 5px;
+	position: relative;
+	left: 5%;
+	width: 90%;
+}
+
+#w3c .tiny
+{
+	color: #A808FF;
+	font-size: 60%;
+}
+
+#content p
+{
+	width: 95%;
+	padding-left: 15px;
+	text-align: justify;
+}
+
+#content h1, #content h2
+{
+	padding: 15px;
+}
+
+
+ol ol, ol.roman
+{
+	list-style-type: upper-roman;
+}
+
+img
+{
+	border-style: none;
+}
+
+
+.general_title
+{
+	margin-top: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	position: relative;
+	text-align: center;
+	color: #ffffff;
+
+	background: #0000FF;
+
+	border-color:#9999FF; 
+	border-style: outset;
+	border-width: 9px;
+}
+
+a:active, a:link, a:visited
+{
+	color: #0000AA;
+	text-decoration: none;
+	border-style: none;
+}
+
+a[href]:hover
+{
+	color: #0000FF;
+	text-decoration: underline;
+	border-style: none;
+}
+
+a[name]:hover
+{
+	color: #000000;
+	text-decoration: none;
+}
+
+.htiny
+{
+	font-size: 50%;
+}
+
+p.code
+{
+        position: relative;
+        color: #223322;
+        border-style: double;
+        border-width: 4px;
+        border-color: #0065ff;
+        background-color: #f6f6f6;
+        font-size: 95%;
+
+        font-family: monospace;
+
+        padding: 10px;
+        top: 30px;
+        margin-bottom: 50px;
+}
+
+p.code span.title
+{
+        position: absolute;
+        font-weight: bold;
+        color: #007F22;
+
+        top: -20px;
+}
+
+.note
+{
+	font-weight: bold;
+	color: #ff0000;
+}
+
+code, code a:active, code a:link, code a:visited
+{
+	color: #0000ff;
+	font-weight: bold;
+}
+
+td.list
+{
+	border-bottom-style: dotted;
+	border-bottom-width: 1px;
+	width: 165px;
+	vertical-align: top;
+}
+
+td.expl
+{
+	border-bottom-style: dotted;
+	border-bottom-width: 1px;
+	vertical-align: top;
+}
+
+td.rand
+{
+	border-top-style: dotted;
+	border-top-width: 1px;
+}
+
+table.explain
+{
+	width: 95%;	
+}
+
+table.explain code
+{
+	color: #009900;
+	font-style: italic;
+}
+
+table.explain code.null
+{
+	color: #000000;
+	font-style: normal;
+	font-weight: bold;
+}
+
+table.explain code a
+{
+	color: #0044FF;
+	font-style: normal;
+}
+
+span.number
+{
+	color: #FF0000;
+	font-weight: bold;
+}
+
+hr
+{
+	width: 95%;
+	height:6px;
+	border:3px double #0000ff;
+	background-color: #87ceeb;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	
+}

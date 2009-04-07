@@ -1,0 +1,33 @@
+/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
+.c_highlight_geshi_code .imp {font-weight: bold; color: red;}
+.c_highlight_geshi_code .kw1 {color: #b1b100;}
+.c_highlight_geshi_code .kw2 {color: #0000ff; font-weight: bold;}
+.c_highlight_geshi_code .kw3 {color: #000066;}
+.c_highlight_geshi_code .kw4 {color: #993333;}
+.c_highlight_geshi_code .kw5 {color: #0000cc;}
+.c_highlight_geshi_code .kw6 {color: #000066;}
+.c_highlight_geshi_code .kw7 {color: #000000; font-weight: bold;}
+.c_highlight_geshi_code .kw8 {color: #0000ff;}
+.c_highlight_geshi_code .kw9 {color: #ff0000;}
+.c_highlight_geshi_code .co1 {color: #808080; font-style: italic;}
+.c_highlight_geshi_code .co2 {color: #339933;}
+.c_highlight_geshi_code .coMULTI {color: #808080; font-style: italic;}
+.c_highlight_geshi_code .coMULTIlist {color: #123456; font-style: italic; font-weight: bold; font-size: 110%; }
+.c_highlight_geshi_code .es0 {color: #000099; font-weight: bold;}
+.c_highlight_geshi_code .br0 {color: #66cc66;}
+.c_highlight_geshi_code .st0 {color: #ff0000;}
+.c_highlight_geshi_code .nu0 {color: #cc66cc;}
+.c_highlight_geshi_code .me1 {color: #202020;}
+.c_highlight_geshi_code .me2 {color: #202020;}
+
+.bash_highlight_geshi_code .imp {font-weight: bold; color: red;}
+.bash_highlight_geshi_code .kw1 {color: #b1b100;}
+.bash_highlight_geshi_code .kw3 {color: #000066;}
+.bash_highlight_geshi_code .co1 {color: #808080; font-style: italic;}
+.bash_highlight_geshi_code .es0 {color: #000099; font-weight: bold;}
+.bash_highlight_geshi_code .br0 {color: #66cc66;}
+.bash_highlight_geshi_code .st0 {color: #ff0000;}
+.bash_highlight_geshi_code .nu0 {color: #cc66cc;}
+.bash_highlight_geshi_code .re0 {color: #0000ff;}
+.bash_highlight_geshi_code .re1 {color: #0000ff;}
+.bash_highlight_geshi_code .re2 {color: #0000ff;}

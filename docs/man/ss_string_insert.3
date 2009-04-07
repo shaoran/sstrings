@@ -1,0 +1,54 @@
+.\" Copyright 2005 by Pablo Yanez Trujillo <yanezp@informatk.uni-freiburg.de>
+.\" The safe Strings Library Version 2.0.1
+.\" 
+.\" This is free software. Please read the file COPYING if you
+.\" want to use/edit/distribuite this source file.
+.\" This source file is protected by the GNU GPL-2
+.\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
+.\" FITNESS FOR A PARTICULAR PURPOSE.
+.TH "SS_STRING_INSERT" "3" "September 2006" "Version 2.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.SH "NAME"
+ss_string_insert, ss_string_insert_c_string, ss_string_insert_c_string_l - inserts a substring
+
+.SH "SYNOPSIS"
+.B #include <sstrings2.h>
+
+.B Linking with -lsstrings2
+.sp
+.BI "int ss_string_insert(ss_string *"string ", const ss_string *"insert ", size_t "pos ");"
+.br
+.BI "int ss_string_insert_c_string(ss_string *"string ", const char *"insert ", size_t "pos ");"
+.br
+.BI "int ss_string_insert_c_string_l(ss_string *"string ", const char *"insert ", size_t "ins_len ", size_t "pos ");"
+
+.SH "DESCRIPTION"
+\fBss_string_insert\fR inserts the string saved in \fIinsert\fR at position \fIpos\fR of \fIstring\fR. Note that \fIstring\fR and \fIinsert\fR
+must be valid \fBss_string\fR objects (initialized with \fBss_string_new\fR).
+
+\fBss_string_insert_c_string\fR inserts the C-string \fIinsert\fR at position \fIpos\fR of \fIstring\fR. Note that \fIstring\fR and \fIinsert\fR
+must be valid \fBss_string\fR objects (initialized with \fBss_string_new\fR).
+
+\fBss_string_insert_c_string_l\fR works like \fBss_string_insert_c_string\fR. \fIins_len\fR is the right length of \fIinsert\fR. 
+Note that this function does not check whether \fIins_len\fR is the right length of \fIinsert\fR.
+
+.SS "Returning Value"
+The functions return 1 on success, 0 otherwise
+
+.SS "Error values for ss_errno"
+\fISS_NULL\fR is a parameter is NULL
+
+\fISS_NOMEM\fR if there is no more memory left
+
+\fISS_EINVAL\fR if the \fBss_string\fR objects are invalid
+
+\fISS_EINVAL\fR if \fIpos\fR is equal or greater than the string length saved in \fIstring\fR
+
+.SH "BUGS"
+Please send your bug reports to yanezp@informatik.uni-freiburg.de
+
+.SH "SEE ALSO"
+.BR ss_string_new (3),
+.BR ss_string_delete (3),
+.BR ss_string_insert (3),
+.BR ss_string_insert_c_string (3),
+.BR ss_string_insert_c_string_l (3)

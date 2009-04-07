@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="Author" content="Pablo Yanez Trujillo" />
+<meta name="Audience" content="Alle" />
+<meta name="Expires" content="0" />
+<meta name="Description" content="Safe Strings Library Reference Manual" />
+<meta name="Keywords" content="safe, strings, string, CString, char, char*, safe strings, sstring, C" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="Robots" content="INDEX,FOLLOW" />
+<meta name="Revisit-After" content="5 days" />
+<link rel="stylesheet" href="style/sstrings-styles.css" type="text/css" />
+<link rel="stylesheet" href="style/code.css" type="text/css" />
+<title>Safe Strings Library Reference Manual</title>
+</head>
+<body>
+<div id="content">
+<h1 class="general_title">Safe Strings Library Reference Manual</h1>
+
+<p>Safe Strings library, version 2.0.1<br />
+<a href="basics.html" title="SStrings Basics"><img src="images/left.jpg" alt="Back" /></a>&nbsp;
+<a href="index.html" title="Table of contents"><img src="images/up.jpg" alt="Home" /></a>
+</p>
+
+<h1>API Reference</h1>
+
+<ol class="roman">
+<li><a href="api.html#basic" title="Basic information">Basic information</a></li>
+<li><a href="api.html#api" title="API Reference">API Reference</a></li>
+</ol>
+
+<h2><a name="basic">I. Basic information</a> <a href="api.html"><img src="images/top.gif" alt="top" /></a>
+<a href="api.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+
+<ul>
+<li>If you want to use SStrings then you have to create a new <code><a href="basics.html#ss_string">ss_string-object</a></code>
+and initalize it with <code><a href="api.html#ss_string_new">ss_string_new</a></code>.</li>
+<li>
+If the argument of a function is <code>char*</code> then the function will always expect a 0-terminated string, otherwise
+the behaviour of the function is undefined.
+</li>
+<li>
+If you don't use the <a href="basics.html#gc">garbage collector</a> then you have to free the <code><a href="basics.html#ss_string">
+ss_string-objects</a></code> by yourself with <code><a href="api.html#ss_string_free">ss_string_free</a></code>.
+</li>
+</ul>
+
+</blockquote>
+
+
+<h2><a name="api">II. API Reference</a> <a href="api.html"><img src="images/top.gif" alt="top" /></a>
+<a href="api.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+
+<!-- [Start of] list with all functions -->
+
+<p class="code">
+<span class="title">SString Function List</span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="coMULTIlist">/* Object generating functions */</span>
+<a href="basics.html#ss_string"><span class="kw5">ss_string</span></a>* <a href="api.html#ss_string_new"><span class="kw6">ss_string_new</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span>* init<span class="br0">&#41;</span>;
+&nbsp;
+&nbsp;
+<span class="coMULTIlist">/* Object destroy functions &amp; Garbage Collector*/</span>
+<span class="kw4">char</span> *<a href="api.html#ss_string_free"><span class="kw6">ss_string_free</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">int</span> free_cstring<span class="br0">&#41;</span>;
+<span class="kw4">void</span> <a href="api.html#ss_string_gc_free"><span class="kw6">ss_string_gc_free</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span> *str<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_enable_gc"><span class="kw6">ss_string_enable_gc</span></a><span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span>;
+&nbsp;
+&nbsp;
+<span class="coMULTIlist">/* Help routines */</span>
+<span class="kw4">void</span> <a href="api.html#ss_string_perror"><span class="kw6">ss_string_perror</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span> *msg<span class="br0">&#41;</span>;
+<span class="kw4">char</span>* <a href="api.html#strrstr"><span class="kw6">strrstr</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span> *haystack, <span class="kw4">const</span> <span class="kw4">char</span> *needle<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_strcmp"><span class="kw6">ss_string_strcmp</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *s1, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *s2<span class="br0">&#41;</span>;
+&nbsp;
+&nbsp;
+<span class="coMULTIlist">/* Insert functions */</span>
+<span class="kw4">int</span> <a href="api.html#ss_string_append"><span class="kw6">ss_string_append</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *src<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_append_c_string"><span class="kw6">ss_string_append_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *src<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_append_c_string_l"><span class="kw6">ss_string_append_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *src, <span class="kw4">size_t</span> src_len<span class="br0">&#41;</span>;
+&nbsp;
+<span class="kw4">int</span> <a href="api.html#ss_string_insert"><span class="kw6">ss_string_insert</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *insert, <span class="kw4">size_t</span> pos<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_insert_c_string"><span class="kw6">ss_string_insert_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *insert, <span class="kw4">size_t</span> pos<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_insert_c_string_l"><span class="kw6">ss_string_insert_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *insert, <span class="kw4">size_t</span> ins_len, <span class="kw4">size_t</span> pos<span class="br0">&#41;</span>;
+&nbsp;
+&nbsp;
+<span class="coMULTIlist">/* Replace functions */</span>
+<span class="kw4">int</span> <a href="api.html#ss_string_replace"><span class="kw6">ss_string_replace</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *pattern, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *replace<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_replace_c_string"><span class="kw6">ss_string_replace_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, <span class="kw4">const</span> <span class="kw4">char</span> *replace<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_replace_c_string_l"><span class="kw6">ss_string_replace_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, 
+                                 <span class="kw4">size_t</span> patt_len, <span class="kw4">const</span> <span class="kw4">char</span> *replace, <span class="kw4">size_t</span> repl_len<span class="br0">&#41;</span>;
+&nbsp;
+<span class="kw4">int</span> <a href="api.html#ss_string_rreplace"><span class="kw6">ss_string_rreplace</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *pattern, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *rreplace<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rreplace_c_string"><span class="kw6">ss_string_rreplace_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, <span class="kw4">const</span> <span class="kw4">char</span> *rreplace<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rreplace_c_string_l"><span class="kw6">ss_string_rreplace_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, 
+                                 <span class="kw4">size_t</span> patt_len, <span class="kw4">const</span> <span class="kw4">char</span> *rreplace, <span class="kw4">size_t</span> repl_len<span class="br0">&#41;</span>;
+&nbsp;
+&nbsp;
+<span class="coMULTIlist">/* Delete &amp; Crop functions */</span>
+<span class="kw4">int</span> <a href="api.html#ss_string_delete"><span class="kw6">ss_string_delete</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">size_t</span> pos, <span class="kw4">size_t</span> len<span class="br0">&#41;</span>;
+&nbsp;
+<span class="kw4">int</span> <a href="api.html#ss_string_crop"><span class="kw6">ss_string_crop</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *pattern<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_crop_c_string"><span class="kw6">ss_string_crop_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_crop_c_string_l"><span class="kw6">ss_string_crop_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, <span class="kw4">size_t</span> patt_len<span class="br0">&#41;</span>;
+&nbsp;
+<span class="kw4">int</span> <a href="api.html#ss_string_rcrop"><span class="kw6">ss_string_rcrop</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *pattern<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rcrop_c_string"><span class="kw6">ss_string_rcrop_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rcrop_c_string_l"><span class="kw6">ss_string_rcrop_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, <span class="kw4">size_t</span> patt_len<span class="br0">&#41;</span>;
+&nbsp;
+<span class="kw4">int</span> <a href="api.html#ss_string_ltrim"><span class="kw6">ss_string_ltrim</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">int</span> <span class="br0">&#40;</span>*blank<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rtrim"><span class="kw6">ss_string_rtrim</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">int</span> <span class="br0">&#40;</span>*blank<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_trim"><span class="kw6">ss_string_trim</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">int</span> <span class="br0">&#40;</span>*blank<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+&nbsp;
+<span class="coMULTIlist">/* callback definition */</span> 
+<span class="kw4">int</span> blank<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span>;
+&nbsp;
+&nbsp;
+<span class="coMULTIlist">/* Copy functions */</span>
+<span class="kw4">int</span> <a href="api.html#ss_string_copy"><span class="kw6">ss_string_copy</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *dest, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *src<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_copy_c_string"><span class="kw6">ss_string_copy_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *dest, <span class="kw4">const</span> <span class="kw4">char</span> *src<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_copy_c_string_l"><span class="kw6">ss_string_copy_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *dest, <span class="kw4">const</span> <span class="kw4">char</span> *src, <span class="kw4">size_t</span> len<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<!-- [End of] list with all functions -->
+
+</blockquote>
+
+
+<h2>Object generating functions</h2>
+
+<blockquote>
+<p class="code">
+<span class="title">SString function<a name="ss_string_new">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a>* <a href="api.html#ss_string_new"><span class="kw6">ss_string_new</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span>* init<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Creates a new <a href="basics.html#ss_string">ss_string</a> object initialized with an initial text
+  </td>
+</tr>
+<tr>
+  <td class="list"><code>init</code></td>
+  <td class="expl">The initial text to copy into the string. This argument cannot be <code class="null">NULL</code></td>
+</tr>
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl">A newly created <a href="basics.html#ss_string">ss_string</a> object. <code class="null">NULL</code> by failure</td>
+</tr>
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>init</code> is NULL.<br />
+  <code><a href="basics.html#errormodel">SS_NOMEM</a></code> if there is no memory available (memory cannot be allocated) 
+  </td>
+</tr>
+</table>
+</blockquote>
+
+
+<h2>Object destroy functions &amp; Garbage Collector</h2>
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Funktion<a name="ss_string_free">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">char</span> *<a href="api.html#ss_string_free"><span class="kw6">ss_string_free</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">int</span> free_cstring<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">frees the allocates memory for the <a href="basics.html#ss_string">ss_string-Object</a> and its string
+  </td>
+</tr>
+<tr>
+  <td class="list"><code>string</code></td>
+  <td class="expl">The <a href="basics.html#ss_string">ss_string-Object</a> to be freed</td>
+</tr>
+<tr>
+  <td class="list"><code>free_cstring</code></td>
+  <td class="expl">Non-0 then the string is freed. If <code>free_cstring</code> is <span class="number">0</span> then the string
+  is returned</td>
+</tr>
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl">The pointer to the string if <code>free_cstring</code> is <span class="number">0</span>. <code class="null">NULL</code> otherwise</td>
+</tr>
+</table>
+
+</blockquote>
+
+<hr />
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Funktion<a name="ss_string_gc_free">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">void</span> <a href="api.html#ss_string_gc_free"><span class="kw6">ss_string_gc_free</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span> *str<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Description: When you set <code>free_cstring</code> to 0 when you use <code><a href="api.html#ss_string_free">ss_string_free()</a></code> you get the pointer to the C-String. This C-String must be freed with <code><a href="api.html#ss_string_gc_free">ss_string_gc_free()</a></code></td>
+</tr>
+<tr>
+  <td class="list"><code>str</code></td>
+  <td class="expl">The pointer to the C-String to be freed</td>
+</tr>
+</table>
+
+</blockquote>
+
+<hr />
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Funktion<a name="ss_string_enable_gc">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_enable_gc"><span class="kw6">ss_string_enable_gc</span></a><span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Enables the usage of the simple garbage collector. This function should be called before any other ss_string functions</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure</td>
+</tr>
+</table>
+
+</blockquote>
+
+<h2>Help routines</h2>
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function<a name="ss_string_perror">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">void</span> <a href="api.html#ss_string_perror"><span class="kw6">ss_string_perror</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span> *msg<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">This function works like <code><a href="http://www.opengroup.org/onlinepubs/009695399/functions/perror.html"><span class="kw3">perror</span>()</a></code>. <code><a href="api.html#ss_string_perror">ss_string_perror()</a></code> uses the <code>ss_errno</code> variabe instead of <code>errno</code></td>
+</tr>
+<tr>
+  <td class="list"><code>msg</code></td>
+  <td class="expl">The string pointed to by <code>msg</code> that should be printed before the error message</td>
+</tr>
+</table>
+
+</blockquote>
+
+<hr />
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function<a name="strrstr">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">char</span>* <a href="api.html#strrstr"><span class="kw6">strrstr</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span> *haystack, <span class="kw4">const</span> <span class="kw4">char</span> *needle<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Searches for the last occurrence of a substring in a string</td>
+</tr>
+<tr>
+  <td class="list"><code>haystack</code></td>
+  <td class="expl">The C-String in which must be searched</td>
+</tr>
+<tr>
+  <td class="list"><code>needle</code></td>
+  <td class="expl">The substring</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl">A pointer to the last occurrence of <code>needle</code> in <code>haystack</code>. <code class="null">NULL</code> if <code>needle</code> is not found.</td>
+</tr>
+</table>
+
+</blockquote>
+
+<hr />
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function <a name="ss_string_strcmp">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_strcmp"><span class="kw6">ss_string_strcmp</span></a><span class="br0">&#40;</span><span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *s1, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *s2<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Compares two strings to content equality</td>
+</tr>
+<tr>
+  <td class="list"><code>s1</code></td>
+  <td class="expl">a valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>s2</code></td>
+  <td class="expl">a valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">0</span> if both strings are equal, <span class="number">1</span> if not, -<span class="number">1</span> on error an <code>ss_errno</code> is set</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>s1</code> or <code>s2</code> are <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>s1</code> or <code>s2</code> are invalid ss_string_Objects<br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+
+<h2>Insert functions</h2>
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Funktion<a name="ss_string_append">&nbsp;</a><a name="ss_string_append_c_string">&nbsp;</a><a name="ss_string_append_c_string_l">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_append"><span class="kw6">ss_string_append</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *src<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_append_c_string"><span class="kw6">ss_string_append_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *src<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_append_c_string_l"><span class="kw6">ss_string_append_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *src, <span class="kw4">size_t</span> src_len<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">This function family append a string into a <a href="basics.html#ss_string">ss_string-Object</a>.</td>
+</tr>
+<tr>
+  <td class="list"><code>string</code></td>
+  <td class="expl">A valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>src</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_append">ss_string_append()</a></code>: another valid <a href="basics.html#ss_string">ss_string-Object</a> to be appended<br /><code><a href="api.html#ss_string_append_c_string">ss_string_append_c_string()</a></code>, <code><a href="api.html#ss_string_append_c_string_l">ss_string_append_c_string_l()</a></code>: The string pointed to by <code>src</code></td>
+</tr>
+<tr>
+  <td class="list"><code>src_len</code></td>
+  <td class="expl">If you know the right length of the C-String then you can use <code><a href="api.html#ss_string_append_c_string_l">ss_string_append_c_string_l()</a></code>. Note that <code><a href="api.html#ss_string_append_c_string_l">ss_string_append_c_string_l()</a></code> does not check whether <code>src_len</code> is the right length.</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>string</code> or <code>src</code> are <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_NOMEM</a></code> if there is no memory available (memory cannot be allocated)<br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>string</code> is not a valid <a href="basics.html#ss_string">ss_string-Object</a><br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+<hr />
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function <a name="ss_string_insert">&nbsp;</a><a name="ss_string_insert_c_string">&nbsp;</a><a name="ss_string_insert_c_string_l">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_insert"><span class="kw6">ss_string_insert</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *insert, <span class="kw4">size_t</span> pos<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_insert_c_string"><span class="kw6">ss_string_insert_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *insert, <span class="kw4">size_t</span> pos<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_insert_c_string_l"><span class="kw6">ss_string_insert_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *insert, <span class="kw4">size_t</span> ins_len, <span class="kw4">size_t</span> pos<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Inserts a substring into a string</td>
+</tr>
+<tr>
+  <td class="list"><code>string</code></td>
+  <td class="expl">a valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>insert</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_insert">ss_string_insert()</a></code>: a valid <a href="basics.html#ss_string">ss_string-Object</a> containing the substring to be inserted<br /><code><a href="api.html#ss_string_insert_c_string">ss_string_insert_c_string*()</a></code>: the substring (to be inserted) pointed to by <code>insert</code></td>
+</tr>
+<tr>
+  <td class="list"><code>pos</code></td>
+  <td class="expl">The position at which <code>insert</code> must be inserted</td>
+</tr>
+<tr>
+  <td class="list"><code>ins_len</code></td>
+  <td class="expl">The length of <code>insert</code>. Note that <code><a href="api.html#ss_string_insert_c_string_l">ss_string_insert_c_string_l()</a></code> does not check whether <code>ins_len</code> is the right length.</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>string</code> or <code>insert</code> are <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_NOMEM</a></code> if there is no memory available (memory cannot be allocated)<br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>string</code> or <code>insert</code> are invalid <a href="basics.html#ss_string">ss_string-Object</a>s<br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+
+<h2>Replace functions</h2>
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function <a name="ss_string_replace">&nbsp;</a><a name="ss_string_replace_c_string">&nbsp;</a><a name="ss_string_replace_c_string_l">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_replace"><span class="kw6">ss_string_replace</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *pattern, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *replace<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_replace_c_string"><span class="kw6">ss_string_replace_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, <span class="kw4">const</span> <span class="kw4">char</span> *replace<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_replace_c_string_l"><span class="kw6">ss_string_replace_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, 
+                                 <span class="kw4">size_t</span> patt_len, <span class="kw4">const</span> <span class="kw4">char</span> *replace, <span class="kw4">size_t</span> repl_len<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Replaces the first occurrence of a substring given by its pattern with another substring</td>
+</tr>
+<tr>
+  <td class="list"><code>string</code></td>
+  <td class="expl">a valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>pattern</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_replace">ss_string_replace()</a></code>: a valid <a href="basics.html#ss_string">ss_string-Object</a> containing the pattern to be replaced<br /><code><a href="api.html#ss_string_replace_c_string">ss_string_replace_c_string*()</a></code>: the pattern (to be replaced) pointed to by <code>pattern</code></td>
+</tr>
+<tr>
+  <td class="list"><code>replace</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_replace">ss_string_replace()</a></code>: a valid <a href="basics.html#ss_string">ss_string-Object</a> containing the substitute substring<br /><code><a href="api.html#ss_string_replace_c_string">ss_string_replace_c_string*()</a></code>: the substitute substring pointed to by <code>replace</code></td>
+</tr>
+<tr>
+  <td class="list"><code>patt_len</code></td>
+  <td class="expl">The pattern length. Note that <code><a href="api.html#ss_string_replace_c_string_l">ss_string_replace_c_string_l()</a></code> does not check whether <code>patt_len</code> is the right length.</td>
+</tr>
+<tr>
+  <td class="list"><code>repl_len</code></td>
+  <td class="expl">The substitute substring length. Note that <code><a href="api.html#ss_string_replace_c_string_l">ss_string_replace_c_string_l()</a></code> does not check whether <code>repl_len</code> is the right length.</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure, -<span class="number">1</span> when <code>pattern</code> is not found in <code>string</code></td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>string</code> or <code>pattern</code> or <code>replace</code> are <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_NOMEM</a></code> if there is no memory available (memory cannot be allocated)<br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>string</code> or <code>pattern</code> or <code>replace</code> are invalid <a href="basics.html#ss_string">ss_string-Object</a>s<br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+
+<hr />
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function <a name="ss_string_rreplace">&nbsp;</a><a name="ss_string_rreplace_c_string">&nbsp;</a><a name="ss_string_rreplace_c_string_l">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_rreplace"><span class="kw6">ss_string_rreplace</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *pattern, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *rreplace<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rreplace_c_string"><span class="kw6">ss_string_rreplace_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, <span class="kw4">const</span> <span class="kw4">char</span> *rreplace<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rreplace_c_string_l"><span class="kw6">ss_string_rreplace_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, 
+                                 <span class="kw4">size_t</span> patt_len, <span class="kw4">const</span> <span class="kw4">char</span> *rreplace, <span class="kw4">size_t</span> repl_len<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Replaces the last occurrence of a substring given by its pattern with another substring</td>
+</tr>
+<tr>
+  <td class="list"><code>string</code></td>
+  <td class="expl">a valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>pattern</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_rreplace">ss_string_rreplace()</a></code>: a valid <a href="basics.html#ss_string">ss_string-Object</a> containing the pattern to be replaced<br /><code><a href="api.html#ss_string_rreplace_c_string">ss_string_rreplace_c_string*()</a></code>: the pattern (to be replaced) pointed to by <code>pattern</code></td>
+</tr>
+<tr>
+  <td class="list"><code>replace</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_rreplace">ss_string_rreplace()</a></code>: a valid <a href="basics.html#ss_string">ss_string-Object</a> containing the substitute substring<br /><code><a href="api.html#ss_string_rreplace_c_string">ss_string_rreplace_c_string*()</a></code>: the substitute substring pointed to by <code>rreplace</code></td>
+</tr>
+<tr>
+  <td class="list"><code>patt_len</code></td>
+  <td class="expl">The pattern length. Note that <code><a href="api.html#ss_string_rreplace_c_string_l">ss_string_rreplace_c_string_l()</a></code> does not check whether <code>patt_len</code> is the right length.</td>
+</tr>
+<tr>
+  <td class="list"><code>repl_len</code></td>
+  <td class="expl">The substitute substring length. Note that <code><a href="api.html#ss_string_rreplace_c_string_l">ss_string_rreplace_c_string_l()</a></code> does not check whether <code>repl_len</code> is the right length.</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure, -<span class="number">1</span> when <code>pattern</code> is not found in <code>string</code></td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>string</code> or <code>pattern</code> or <code>replace</code> are <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_NOMEM</a></code> if there is no memory available (memory cannot be allocated)<br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>string</code> or <code>pattern</code> or <code>replace</code> are invalid <a href="basics.html#ss_string">ss_string-Object</a>s<br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+
+<h2>Delete &amp; Crop functions</h2>
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Funktion<a name="ss_string_delete">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_delete"><span class="kw6">ss_string_delete</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">size_t</span> pos, <span class="kw4">size_t</span> len<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Deletes a substring by its position</td>
+</tr>
+<tr>
+  <td class="list"><code>string</code></td>
+  <td class="expl">A valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>pos</code></td>
+  <td class="expl">The position of the substring to be deleted.</td>
+</tr>
+<tr>
+  <td class="list"><code>len</code></td>
+  <td class="expl">The length of the substring to be deleted.</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>string</code> is <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>string</code> is an invalid <a href="basics.html#ss_string">ss_string-Object</a> / <code>pos</code> determines an invalid position<br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+<hr />
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function<a name="ss_string_crop">&nbsp;</a><a name="ss_string_crop_c_string">&nbsp;</a><a name="ss_string_crop_c_string_l">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_crop"><span class="kw6">ss_string_crop</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *pattern<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_crop_c_string"><span class="kw6">ss_string_crop_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_crop_c_string_l"><span class="kw6">ss_string_crop_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, <span class="kw4">size_t</span> patt_len<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Deletes the first occurrence of a substring given by its pattern</td>
+</tr>
+<tr>
+  <td class="list"><code>string</code></td>
+  <td class="expl">a valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>pattern</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_crop">ss_string_crop()</a></code>: a valid <a href="basics.html#ss_string">ss_string-Object</a> containing the pattern<br /><code><a href="api.html#ss_string_crop_c_string">ss_string_crop_c_string*()</a></code>: the pattern pointed to by <code>pattern</code></td>
+</tr>
+<tr>
+  <td class="list"><code>patt_len</code></td>
+  <td class="expl">The length of the pattern. Note that <code><a href="api.html#ss_string_crop_c_string_l">ss_string_crop_c_string_l()</a></code> does not check whether <code>patt_len</code> is the right length.</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>string</code> or <code>pattern</code> are <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>string</code> or <code>pattern</code> are invalid <a href="basics.html#ss_string">ss_string-Object</a>s<br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+<hr />
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function<a name="ss_string_rcrop">&nbsp;</a><a name="ss_string_rcrop_c_string">&nbsp;</a><a name="ss_string_rcrop_c_string_l">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_rcrop"><span class="kw6">ss_string_rcrop</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *pattern<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rcrop_c_string"><span class="kw6">ss_string_rcrop_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rcrop_c_string_l"><span class="kw6">ss_string_rcrop_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">const</span> <span class="kw4">char</span> *pattern, <span class="kw4">size_t</span> patt_len<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Deletes the last occurrence of a substring given by its pattern</td>
+</tr>
+<tr>
+  <td class="list"><code>string</code></td>
+  <td class="expl">a valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>pattern</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_rcrop">ss_string_rcrop()</a></code>: a valid <a href="basics.html#ss_string">ss_string-Object</a> containing the pattern<br /><code><a href="api.html#ss_string_rcrop_c_string">ss_string_rcrop_c_string*()</a></code>: the pattern pointed to by <code>pattern</code></td>
+</tr>
+<tr>
+  <td class="list"><code>patt_len</code></td>
+  <td class="expl">The length of the pattern. Note that <code><a href="api.html#ss_string_rcrop_c_string_l">ss_string_rcrop_c_string_l()</a></code> does not check whether <code>patt_len</code> is the right length.</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>string</code> or <code>pattern</code> are <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>string</code> or <code>pattern</code> are invalid <a href="basics.html#ss_string">ss_string-Object</a>s<br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+<hr />
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function <a name="ss_string_ltrim">&nbsp;</a><a name="ss_string_rtrim">&nbsp;</a><a name="ss_string_trim">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_ltrim"><span class="kw6">ss_string_ltrim</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">int</span> <span class="br0">&#40;</span>*blank<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_rtrim"><span class="kw6">ss_string_rtrim</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">int</span> <span class="br0">&#40;</span>*blank<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_trim"><span class="kw6">ss_string_trim</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string, <span class="kw4">int</span> <span class="br0">&#40;</span>*blank<span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+&nbsp;
+<span class="coMULTI">/* callback definition */</span>
+&nbsp;
+<span class="kw4">int</span> blank<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Deletes the leading characters of a string that are equal.<br /><code><a href="api.html#ss_string_ltrim">ss_string_ltrim()</a></code> deletes all leading characters from left to right.<br /><code><a href="api.html#ss_string_rltrim">ss_string_rltrim()</a></code> deletes all leading characters from right to left.<br /><code><a href="api.html#ss_string_trim">ss_string_trim()</a></code> deletes all leading characters at the beginning and at the end of the string</td>
+</tr>
+<tr>
+  <td class="list"><code>string</code></td>
+  <td class="expl">a valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>blank</code></td>
+  <td class="expl">a function pointer to a function that returns <span class="number">1</span> if the character must be deleted, <span class="number">0</span> otherwise</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>string</code> or <code>blank</code> are <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>string</code> is an invalid <a href="basics.html#ss_string">ss_string-Object</a><br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+
+<h2>Copy functions</h2>
+
+<blockquote>
+
+<p class="code">
+<span class="title">SString Function<a name="ss_string_copy">&nbsp;</a><a name="ss_string_copy_c_string">&nbsp;</a><a name="ss_string_copy_c_string_l">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">int</span> <a href="api.html#ss_string_copy"><span class="kw6">ss_string_copy</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *dest, <span class="kw4">const</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *src<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_copy_c_string"><span class="kw6">ss_string_copy_c_string</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *dest, <span class="kw4">const</span> <span class="kw4">char</span> *src<span class="br0">&#41;</span>;
+<span class="kw4">int</span> <a href="api.html#ss_string_copy_c_string_l"><span class="kw6">ss_string_copy_c_string_l</span></a><span class="br0">&#40;</span><a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *dest, <span class="kw4">const</span> <span class="kw4">char</span> *src, <span class="kw4">size_t</span> len<span class="br0">&#41;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">Copies a string into a <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>dest</code></td>
+  <td class="expl">A valid <a href="basics.html#ss_string">ss_string-Object</a></td>
+</tr>
+<tr>
+  <td class="list"><code>src</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_copy">ss_string_copy()</a></code>: a valid <a href="basics.html#ss_string">ss_string-Object</a> to be copied<br /><code><a href="api.html#ss_string_copy_c_string">ss_string_copy_c_string*()</a></code>: a string (to be copied) pointed to by <code>src</code></td>
+</tr>
+<tr>
+  <td class="list"><code>len</code></td>
+  <td class="expl"><code><a href="api.html#ss_string_copy_c_string_l">ss_string_copy_c_string_l()</a></code>: The length of the string. Note that <code><a href="api.html#ss_string_copy_c_string_l">ss_string_copy_c_string_l()</a></code> does not check whether <code>len</code> is the right length.</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl"><span class="number">1</span> on success, <span class="number">0</span> on failure</td>
+</tr>
+
+<tr>
+  <td class="list"><b>Error model</b></td>
+  <td class="expl"><code><a href="basics.html#errormodel">SS_NULL</a></code> if <code>dest</code> or <code>src</code> are <code class="null">NULL</code><br />
+<code><a href="basics.html#errormodel">SS_NOMEM</a></code> if there is no memory available (memory cannot be allocated)<br />
+<code><a href="basics.html#errormodel">SS_EINVAL</a></code> if <code>dest</code> is an invalid <a href="basics.html#ss_string">ss_string-Object</a><br />
+  </td>
+</tr>
+</table>
+
+</blockquote>
+
+</div>
+
+<div id="w3c">
+<a href="http://validator.w3.org/check?uri=referer" title="Validate this page"><img src="images/w3c-xhtml-validation-80x15.jpg" alt="Valid XHTML 1.0 Strict" /></a>
+&nbsp;
+<a href="http://jigsaw.w3.org/css-validator/check/referer" title="Validate this page"><img src="images/w3c-css-validation-80x15.jpg" alt="Valid CSS!" /></a>
+<span class="tiny">
+This document is release under the terms of the GPL-2. Written by Pablo Yanez Trujillo</span>
+</div>
+
+</body>
+</html>

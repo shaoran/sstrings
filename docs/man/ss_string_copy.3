@@ -1,0 +1,52 @@
+.\" Copyright 2005 by Pablo Yanez Trujillo <yanezp@informatk.uni-freiburg.de>
+.\" The safe Strings Library Version 2.0.1
+.\" 
+.\" This is free software. Please read the file COPYING if you
+.\" want to use/edit/distribuite this source file.
+.\" This source file is protected by the GNU GPL-2
+.\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
+.\" FITNESS FOR A PARTICULAR PURPOSE.
+.TH "SS_STRING_COPY" "3" "September 2006" "Version 2.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.SH "NAME"
+ss_string_copy, ss_string_copy_c_string, ss_string_c_string_l - copies a string
+
+.SH "SINOPSYS"
+.B #include <sstrings2.h>
+
+.B Linking with -lsstrings2
+.sp
+.BI "int ss_string_copy(ss_string *"dest ", const ss_string *"src ");"
+.br
+.BI "int ss_string_copy_c_string(ss_string *"dest ", const char *"src ");"
+.br
+.BI "int ss_string_copy_c_string_l(ss_string *"dest ", const char *"src ", size_t "len ");"
+
+.SH "DESCRIPTION"
+\fBss_string_copy\fR copies the string saved in \fIsrc\fR to the string saved in \fIdest\fR (like \fBstrcpy\fR(3)). Note that both
+\fBss_string\fR objects have to be initialized with \fBss_string_new\fR.
+
+\fBss_string_copy_c_string\fR copies the C-String pointed to by \fIsrc\fR to the string saved in \fIdest\fR. Note that \fBdest\fR must
+be a valid \fBss_string\fR object.
+
+\fBss_string_copy_c_string_l\fR works like \fBss_string_copy_c_string\fR. The third parameter, \fIlen\fR, is the right length of \fIsrc\fR. Note
+that this function does not check whether \fIlen\fR is the right length of \fIsrc\fR.
+
+.SS "Returning value"
+The functions return 1 on success, 0 otherwise.
+
+.SS "Error values for ss_errno"
+\fISS_NULL\fR is a parameter is NULL
+
+\fISS_NOMEM\fR if there is no more memory left
+
+\fISS_EINVAL\fR if the \fBss_string\fR objects are invalid
+
+.SH "BUGS"
+Please send your bug reports to yanezp@informatik.uni-freiburg.de
+
+.SH "SEE ALSO"
+.BR ss_string_new (3),
+.BR ss_string_append (3),
+.BR ss_string_copy (3)
+.BR ss_string_copy_c_string (3),
+.BR ss_string_copy_c_string_l (3)

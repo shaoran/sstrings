@@ -1,0 +1,160 @@
+#!/bin/bash
+# Author: Pablo Yanez Trujillo <yanezp@informatik.uni-freiburg.de>
+# This script helps by creating the formated HTML entries of the functions
+
+function replace_code()
+{
+	echo $1 | sed -e 's/\*\*\([^\*]*\)\*\*/\<code\>\1\<\/code\>/g' \
+		      -e 's/SS_NOERR/\<code\>\<a\ href="basics.html#errormodel"\>SS_NOERR\<\/a\>\<\/code\>/g' \
+		      -e 's/SS_NOMEM/\<code\>\<a\ href="basics.html#errormodel"\>SS_NOMEM\<\/a\>\<\/code\>/g' \
+		      -e 's/SS_NULL/\<code\>\<a\ href="basics.html#errormodel"\>SS_NULL\<\/a\>\<\/code\>/g' \
+		      -e 's/SS_EINVAL/\<code\>\<a\ href="basics.html#errormodel"\>SS_EINVAL\<\/a\>\<\/code\>/g' \
+		      -e 's/<NULL>/\<code class="null"\>NULL\<\/code\>/g' \
+		      -e 's/ss_string-Object/\<a\ href="basics.html#ss_string"\>ss_string-Object\<\/a\>/g' \
+		      -e 's/\([0-9]\{1,\}\)/\<span\ class="number"\>\1\<\/span\>/g' \
+		      -e 's/++\([^++]*\)++/\<code\>\<a\ href="api.html#\1"\>\1()\<\/a\>\<\/code\>/g'
+}
+
+function parameter_code()
+{
+	cat << EOF
+<tr>
+  <td class="list"><code>$1</code></td>
+  <td class="expl">`replace_code "$2"`</td>
+</tr>
+EOF
+}
+
+read -p "Description: " DESC
+	
+if [ -z "${DESC}" ] ; then
+	echo "Description must not be blank" >&2
+	exit 1
+fi
+
+VAR_LIST=""
+ARG_LIST=""
+PARM=""
+VARS="x"
+COUNT=0
+echo "Enter a blank line to stop"
+
+while test -n "${VARS}" ; do
+	let COUNT++
+	read -p "Enter the ${COUNT}. parameter: " VARS
+	if [ -n "${VARS}" ] ; then
+		read -p "Enter the description of ${VARS}: " ARGS
+
+		if [ -z "${ARGS}" ] ; then
+			echo "Description must not be blank" >&2
+			exit 1
+		fi
+
+		VAR_LIST="${VAR_LIST}¢${VARS}"
+		ARG_LIST="${ARG_LIST}¢${ARGS}"
+	fi
+done
+
+echo
+read -p "Return description: " RETURN
+
+if [ -z "${RETURN}" ] ; then
+	echo "Description must not be blank" >&2
+	exit 1
+fi
+
+ERRMOD=""
+echo
+read -p "Use error model? (Y/N) " -n 1 ERRMOD
+
+if [ "${ERRMOD}" == "Y" ] || [ "${ERRMOD}" == "y" ] ; then
+	ERRMOD=true
+else
+	ERRMOD=false
+fi
+
+ERR_LIST=""
+echo
+
+if $ERRMOD ; then
+	ERROR=""
+	read -p "SS_NULL: " ERROR
+
+	test -n "${ERROR}" && ERR_LIST="${ERR_LIST}¢SS_NULLµ${ERROR}"
+
+	ERROR=""
+	read -p "SS_NOMEM: " ERROR
+
+	test -n "${ERROR}" && ERR_LIST="${ERR_LIST}¢SS_NOMEMµ${ERROR}"
+
+	ERROR=""
+	read -p "SS_EINVAL: " ERROR
+
+	test -n "${ERROR}" && ERR_LIST="${ERR_LIST}¢SS_EINVALµ${ERROR}"	
+fi
+
+echo -e "\n\n============================================\n\n"
+
+cat << EOF
+<table class="explain">
+<tr>
+  <td class="list rand"><b>Description</b></td>
+  <td class="expl rand">`replace_code "${DESC}"`</td>
+</tr>
+EOF
+
+if [ -n "${VAR_LIST}" ] ; then
+	COUNT=1 # start using cut with -f 2
+	TMP_VAR="x"
+
+	while test -n "${TMP_VAR}" ; do
+		let COUNT++
+		TMP_VAR=""
+		TMP_VAR="`echo ${VAR_LIST} | cut -d ¢ -f ${COUNT}`"
+
+		if [ -n "${TMP_VAR}" ] ; then
+			TMP_ARG=""
+			TMP_ARG="`echo ${ARG_LIST} | cut -d ¢ -f ${COUNT}`"
+
+			parameter_code "${TMP_VAR}" "${TMP_ARG}"
+		fi
+	done
+fi
+
+cat << EOF
+
+<tr>
+  <td class="list"><b>Returns</b></td>
+  <td class="expl">`replace_code "${RETURN}"`</td>
+</tr>
+EOF
+
+if $ERRMOD ; then
+	COUNT=1 # start using cut with -f 2
+	TMP_ERR="x"
+
+	echo 
+
+	echo '<tr>'
+	echo '  <td class="list"><b>Error model</b></td>'
+	echo -n '  <td class="expl">'
+
+
+	while test -n "${TMP_ERR}" ; do
+		let COUNT++
+		TMP_ERR=""
+		TMP_ERR="`echo ${ERR_LIST} | cut -d ¢ -f ${COUNT}`"
+
+		if [ -n "${TMP_ERR}" ] ; then
+			TMP_ERRCODE="`echo ${TMP_ERR} | cut -d µ -f 1`"
+			TMP_ERRDESC="`echo ${TMP_ERR} | cut -d µ -f 2`"
+
+			echo "`replace_code "${TMP_ERRCODE}"` `replace_code "${TMP_ERRDESC}"`<br />"
+		fi
+	done
+
+	echo '  </td>'
+	echo '</tr>'
+fi
+
+echo "</table>"

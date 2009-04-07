@@ -1,0 +1,41 @@
+.\" Copyright 2005 by Pablo Yanez Trujillo <yanezp@informatk.uni-freiburg.de>
+.\" The safe Strings Library Version 2.0.1
+.\" 
+.\" This is free software. Please read the file COPYING if you
+.\" want to use/edit/distribuite this source file.
+.\" This source file is protected by the GNU GPL-2
+.\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
+.\" FITNESS FOR A PARTICULAR PURPOSE.
+.TH "SS_STRING_DELETE" "3" "September 2006" "Version 2.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.SH "NAME"
+ss_string_delete - deletes a substring
+
+.SH "SYNOPSIS"
+.B #include <sstrings2.h>
+
+.B Linking with -lsstrings2
+.sp
+.BI "int ss_string_delete(ss_string *"string ", size_t "pos ", size_t "len ");"
+
+.SH "DESCRIPTION"
+The procedure \fBss_string_delete\fR deletes the substring at position \fIpos\fR with length \fIlen\fR from the string saved
+in \fIstring\fR. \fIstring\fR has to be initialized with \fBss_string_new\fR. Note that \fIlen\fR may be greater than the total number 
+of characters to be deleted.
+
+.SS "Returning value"
+The functions returns 1 on success, 0 otherwise
+
+.SS "Error values for ss_errno"
+\fISS_NULL\fR if \fIstring\fR is NULL
+
+\fISS_EINVAL\fR if \fIstring\fR is an invalid \fBss_string\fR object
+
+\fISS_EINVAL\fR if \fIpos\fR is equal or greater than the string length saved in \fIstring\fR
+
+.SH "BUGS"
+Please report your bug reports to yanezp@informatik.uni-freiburg.de
+
+.SH "SEE ALSO"
+.BR ss_string_new (3),
+.BR ss_string_crop (3),
+.BR ss_string_replace (3)

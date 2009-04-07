@@ -1,0 +1,73 @@
+.\" Copyright 2005 by Pablo Yanez Trujillo <yanezp@informatk.uni-freiburg.de>
+.\" The safe Strings Library Version 2.0.1
+.\" 
+.\" This is free software. Please read the file COPYING if you
+.\" want to use/edit/distribuite this source file.
+.\" This source file is protected by the GNU GPL-2
+.\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
+.\" FITNESS FOR A PARTICULAR PURPOSE.
+.TH "SS_STRING_FREE" "3" "September 2006" "Version 2.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.SH "NAME"
+ss_string_free, ss_string_gc_free - frees allocated memory for ss_string objects
+
+.SH "SYNOPSIS"
+.B #include <sstrings2.h>
+
+.B Linking with -lsstrings2
+.sp
+.BI "char *ss_string_free(ss_string *"string ", int "free_cstring ");"
+.br
+.BI "void ss_string_gc_free(const char *"str ");"
+
+.SH "DESCRIPTION"
+\fBss_string_free\fR frees the allocated memory of \fIstring\fR (a \fBss_string\fR object) that has been initialized with \fBss_string_new\fR.
+If \fIfree_cstring\fR is a non-0 number then the allocated memory of the C-string is freed, too. Otherwise the C-string is not freed and
+\fBss_string_free\fR returns a pointer to the C-string. In that case the C-String has to be freed using \fBss_string_gc_free\fR.
+
+\fBss_string_gc_free\fR frees the allocated space of the C-String saved in a \fBss_string\fR object. This function should be used
+if \fBss_string_free\fR is called with a non-0 parameter for \fIfree_cstring\fR. If the garbage collector is disabled then you can
+use \fBfree\fR(3) as well.
+
+.SS "Returning value"
+\fBss_string_free\fR returns a pointer to the C-String if \fIfree_cstring\fR has a non-0 value, NULL otherwise
+
+.SH "EXAMPLE"
+.RS
+.nf
+#include <sstrings2.h>
+
+int main(void)
+{
+	ss_string *str;
+	char *tmp;
+
+	str = ss_string_new("Hello");
+
+	if(!str)
+		return 1;
+
+	...
+
+	/* first option */
+
+	ss_string_free(str, 1);
+
+	/* second option */
+
+	tmp = ss_string_free(str, 0);
+
+	do_something_with(str);
+
+	ss_free_gc_free(str);
+
+	return 0;
+}
+.fi
+.RE
+
+.SH "BUGS"
+Please send your bug reports to yanezp@informatik.uni-freiburg.de
+
+.SH "SEE ALSO"
+.BR ss_string_new (3),
+.BR ss_string_gc_free (3)

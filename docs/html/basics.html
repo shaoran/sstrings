@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="Author" content="Pablo Yanez Trujillo" />
+<meta name="Audience" content="Alle" />
+<meta name="Expires" content="0" />
+<meta name="Description" content="Safe Strings Library Reference Manual" />
+<meta name="Keywords" content="safe, strings, string, CString, char, char*, safe strings, sstring, C" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="Robots" content="INDEX,FOLLOW" />
+<meta name="Revisit-After" content="5 days" />
+<link rel="stylesheet" href="style/sstrings-styles.css" type="text/css" />
+<link rel="stylesheet" href="style/code.css" type="text/css" />
+<title>Safe Strings Library Reference Manual</title>
+</head>
+<body>
+<div id="content">
+<h1 class="general_title">Safe Strings Library Reference Manual</h1>
+
+<p>Safe Strings library, version 2.0.1<br />
+<a href="overview.html" title="Safe Strings Overview"><img src="images/left.jpg" alt="Back" /></a>&nbsp;
+<a href="index.html" title="Table of contents"><img src="images/up.jpg" alt="Home" /></a>&nbsp;
+<a href="api.html" title="API Refernce"><img src="images/right.jpg" alt="Next" /></a>
+</p>
+
+<h1>2. SStrings Basics</h1>
+
+<ol class="roman">
+<li><a href="basics.html#types" title="Basic types">Basic types</a></li>
+<li><a href="basics.html#error" title="Error model">Error model</a></li>
+<li><a href="basics.html#gc" title="Using the Garbage Collector">Using the Garbage Collector</a></li>
+<li><a href="basics.html#helloworld" title="&quot;Hello World&quot; with SStrings">&quot;Hello World&quot; with SStrings</a></li>
+<li><a href="basics.html#installing" title="Installing SStrings">Installing SString</a></li>
+<li><a href="basics.html#using" title="Using SStrings">Using SString</a></li>
+</ol>
+
+<h2><a name="types">I. Basic types</a> <a href="basics.html"><img src="images/top.gif" alt="top" /></a>
+<a href="basics.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<p>
+SStrings declares only one custom type <code><a href="basics.html#ss_string">ss_string</a></code>, which is a C struct. <span class="note">Note:</span>
+This struct will be called in this document <code><a href="basics.html#ss_string">ss_string Object</a></code>.
+</p>
+
+<p class="code">
+<span class="title">SStrings Library Code<a name="ss_string">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="kw4">typedef</span> <span class="kw4">struct</span> <span class="br0">&#123;</span>
+        <span class="kw4">char</span> *str; <span class="coMULTI">/* pointer to allocated string */</span>
+        <span class="kw4">size_t</span> len; <span class="coMULTI">/* length of the string */</span>
+        <span class="kw4">size_t</span> bytes; <span class="coMULTI">/* how many bytes are allocated */</span>
+&nbsp;
+<span class="br0">&#125;</span> <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a>;</pre></object>
+</p>
+
+<p>
+The <code><a href="basics.html#ss_string">ss_string-Object</a></code> has 3 variables: 
+<object><ul>
+<li>a pointer to a char* (<code>str</code>) which saves
+the C string. The memory of this pointer is dynamically allocated.</li>
+<li>
+a size_t variable (<code>len</code>) which saves the length of the string saved in <code>str</code>.
+</li>
+<li>
+a size_t variable (<code>bytes</code>) which saves how many bytes are allocated (at the moment) in <code>str</code>.
+</li>
+</ul></object>
+
+We have 2 reasons why we save the length of the string in <code>len</code>.<br />
+1st: <code>strlen</code> works in O(n). We don't need then to  call <code>strlen</code> to determine the length of the string. (It works in O(1))<br />
+2nd: The information saved in <code>bytes</code> helps by determining how may bytes are (re)allocated. SStrings allocates the needed space of
+memory, when a string gets smaller then SString won't reallocate the memory to fit the string length plus one. The advantage of such a 
+strategie is that next time the <code><a href="basics.html#ss_string">ss_string Object</a></code> has to expand memory, SStrings won't 
+need to reallocate too much memory, in most cases it won't be even necessary to reallocate new memory.
+</p>
+
+<p>
+If you want to read the length of the string then read the <code>len</code> element of the 
+<code><a href="basics.html#ss_string">ss_string Object</a></code>.
+</p>
+
+</blockquote>
+
+
+<h2><a name="error">II. Error model</a> <a href="basics.html"><img src="images/top.gif" alt="top" /></a>
+<a href="basics.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<p>
+Since SStrings is written in C, we are not able to handle with errors with exceptions. SString declares the new variable
+<code><a href="basics.html#errormodel">ss_errno</a></code>
+that can be used just like the C <code>errno</code> variable. This variable is always set if a SString function terminates with a fault. In that
+case <code>ss_errno</code> is assigned with one of the following error constants:
+</p>
+
+<p class="code">
+<span class="title">SStrings Library Code<a name="errormodel">&nbsp;</a></span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="coMULTI">/* DON'T DECLARE THIS VARIABLE IN YOUR SOURCE CODE */</span>
+<span class="kw2">extern</span> <span class="kw4">short</span> <a href="basics.html#errormodel"><span class="kw8">ss_errno</span></a>;
+&nbsp;
+<span class="coMULTI">/* error model */</span>
+<span class="kw2">enum</span> <span class="br0">&#123;</span>
+        <a href="basics.html#errormodel"><span class="kw7">SS_NOERR</span></a> = <span class="nu0">0</span>,
+        <a href="basics.html#errormodel"><span class="kw7">SS_NOMEM</span></a>,
+        <a href="basics.html#errormodel"><span class="kw7">SS_NULL</span></a>,
+        <a href="basics.html#errormodel"><span class="kw7">SS_EINVAL</span></a>,
+        SS_NUM  <span class="coMULTI">/* number of errors */</span>
+<span class="br0">&#125;</span>;</pre></object>
+</p>
+
+<table class="explain">
+<tr>
+  <td class="list rand"><code><a href="basics.html#errormodel">SS_NOERR</a></code></td>
+  <td class="expl rand">
+  The function was successful</td>
+</tr>
+
+<tr>
+  <td class="list"><code><a href="basics.html#errormodel">SS_NOMEM</a></code></td>
+  <td class="expl">
+  The function could not (re)allocate the requested memory space because of lack of memory. The actual 
+  <code><a href="basics.html#ss_string">ss_string-Object</a></code> and its string are not modified
+  </td>
+</tr>
+
+<tr>
+  <td class="list"><code><a href="basics.html#errormodel">SS_NULL</a></code></td>
+  <td class="expl">
+  The function does not know what to do because one of its arguments (that shouldn't be <code class="null">NULL</code>) is <code class="null">NULL</code>.
+  The actual <code><a href="basics.html#ss_string">ss_string-Object</a></code> and its string are not modified
+  </td>
+</tr>
+
+<tr>
+  <td class="list"><code><a href="basics.html#errormodel">SS_EINVAL</a></code></td>
+  <td class="expl">
+  One argument has an invalid value, for example passing an invalid <code><a href="basics.html#ss_string">ss_string-Object</a></code>
+  or a wrong string position. The actual <code><a href="basics.html#ss_string">ss_string-Object</a></code> and its string are not modified
+  </td>
+</tr>
+
+<tr>
+  <td class="list"><code><a href="basics.html#errormodel">SS_NUM</a></code></td>
+  <td class="expl">
+  This constant is used by SStrings only! It helps determining the number of error codes available.
+  </td>
+</tr>
+
+</table>
+
+</blockquote>
+
+
+<h2><a name="gc">III. Using the Garbage Collector</a> <a href="basics.html"><img src="images/top.gif" alt="top" /></a>
+<a href="basics.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<p>
+SStrings implements an experimental gargabe collector and should be used at your own risk. Do not use this function if your program has
+already executed a SString function. Use it at the top of every program. This garbage collector can be used if you don't want
+to free the <code><a href="basics.html#ss_string">ss_string-Objects</a></code> manually.
+</p>
+
+<p class="code">
+<span class="title">SStrings Library Code</span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="co2">#include &lt;sstrings2.h&gt;</span>
+ 
+<span class="kw4">void</span> <a href="api.html#ss_string_enable_gc"><span class="kw6">ss_string_enable_gc</span></a><span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span>;</pre></object>
+</p>
+
+
+<p>
+<span class="note">WARNING!!!</span> This function <b>must always be used before</b> you call any other function of this library. If
+you call this function after having called other SStrings functions then you have to remeber which variables were not allocated 
+with the garbage collector and free them manually! If you don't do this and your program crashes then don't come crying to us! You have
+been warned.
+</p>
+
+</blockquote>
+
+
+<h2><a name="helloworld">IV. &quot;Hello World&quot; with SStrings</a> <a href="basics.html"><img src="images/top.gif" alt="top" /></a>
+<a href="basics.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+
+<p>This is the basic &quot;Hello World&quot; programm using SStrings (without the <a href="basics.html#gc">garbage collector</a>):</p>
+
+<p class="code">
+<span class="title">&quot;Hello World&quot; Example</span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="co2">#include &lt;sstrings2.h&gt;</span>
+<span class="co2">#include &lt;stdio.h&gt;</span>
+ 
+<span class="kw4">int</span> main<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string;
+ 
+    string = <a href="api.html#ss_string_new"><span class="kw6">ss_string_new</span></a><span class="br0">&#40;</span><span class="st0">"Hello, World!"</span><span class="br0">&#41;</span>;
+ 
+    <span class="kw1">if</span><span class="br0">&#40;</span>!string<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+         <a href="api.html#ss_string_perror"><span class="kw6">ss_string_perror</span></a><span class="br0">&#40;</span><span class="st0">"ss_string_new"</span><span class="br0">&#41;</span>;
+         <span class="kw1">return</span> <span class="nu0">1</span>;
+    <span class="br0">&#125;</span>
+ 
+    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">&#40;</span><span class="st0">"The ss_string object saves:<span class="es0">\n</span>string = %s<span class="es0">\n</span> length = %d<span class="es0">\n</span>bytes = %d<span class="es0">\n</span>"</span>, 
+            string-&gt;str, string-&gt;len, string-&gt;bytes<span class="br0">&#41;</span>;
+ 
+    <a href="api.html#ss_string_free"><span class="kw6">ss_string_free</span></a><span class="br0">&#40;</span>string, <span class="nu0">1</span><span class="br0">&#41;</span>;
+ 
+    <span class="kw1">return</span> <span class="nu0">0</span>;
+<span class="br0">&#125;</span></pre></object>
+</p>
+
+<p>This is the basic &quot;Hello World&quot; programm using SStrings (using the <a href="basics.html#gc">garbage collector</a>):</p>
+
+<p class="code">
+<span class="title">&quot;Hello World&quot; Example</span>
+<object>
+<pre class="c_highlight_geshi_code"><span class="co2">#include &lt;sstrings2.h&gt;</span>
+<span class="co2">#include &lt;stdio.h&gt;</span>
+ 
+<span class="kw4">int</span> main<span class="br0">&#40;</span><span class="kw4">void</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    <a href="basics.html#ss_string"><span class="kw5">ss_string</span></a> *string;
+ 
+    <span class="kw1">if</span><span class="br0">&#40;</span>!<a href="api.html#ss_string_enable_gc"><span class="kw6">ss_string_enable_gc</span></a><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        fprintf<span class="br0">&#40;</span><span class="kw9">stderr</span>, <span class="st0">"Gargabe collector failed. Aborting...<span class="es0">\n</span>"</span><span class="br0">&#41;</span>;
+        <span class="kw1">return</span> <span class="nu0">1</span>;
+    <span class="br0">&#125;</span>
+ 
+    string = <a href="api.html#ss_string_new"><span class="kw6">ss_string_new</span></a><span class="br0">&#40;</span><span class="st0">"Hello, World!"</span><span class="br0">&#41;</span>;
+ 
+    <span class="kw1">if</span><span class="br0">&#40;</span>!string<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+         <a href="api.html#ss_string_perror"><span class="kw6">ss_string_perror</span></a><span class="br0">&#40;</span><span class="st0">"ss_string_new"</span><span class="br0">&#41;</span>;
+         <span class="kw1">return</span> <span class="nu0">1</span>;
+    <span class="br0">&#125;</span>
+ 
+    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">&#40;</span><span class="st0">"The ss_string object saves:<span class="es0">\n</span>string = %s<span class="es0">\n</span> length = %d<span class="es0">\n</span>bytes = %d<span class="es0">\n</span>"</span>, 
+            string-&gt;str, string-&gt;len, string-&gt;bytes<span class="br0">&#41;</span>;
+ 
+ 
+    <span class="kw1">return</span> <span class="nu0">0</span>;
+<span class="br0">&#125;</span></pre></object>
+</p>
+
+<p>You don't strictly need the <a href="http://gcc.gnu.org/">GNU GCC</a> to compile your source code with SString support. But I will show GCC examples only!</p>
+
+<p class="code">
+<span class="title">BASH</span>
+<object>
+<pre class="bash_highlight_geshi_code">$ gcc -ohello hello.c -lsstrings2</pre></object>
+</p>
+
+</blockquote>
+
+<h2><a name="installing">V. Installing SStrings</a> <a href="basics.html"><img src="images/top.gif" alt="top" /></a>
+<a href="basics.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+
+<p>You first need to fetch the tarballs</p>
+
+<ul>
+  <li><a href="http://klingsor.informatik.uni-freiburg.de/projects/sstrings/sstrings-2.0.1.tar.gz">sstrings-2.0.1.tar.gz</a></li>
+  <li><a href="http://klingsor.informatik.uni-freiburg.de/projects/sstrings/sstrings-2.0.1.tar.bz2">sstrings-2.0.1.tar.bz2</a></li>
+</ul>
+
+<p>After having decompressed the tarball you must execute in your shell:</p>
+
+<p class="code">
+<span class="title">BASH</span>
+<object>
+<pre class="bash_highlight_geshi_code">$ <span class="kw3">cd</span> sstring-<span class="nu0">2</span>.<span class="nu0">0</span>.<span class="nu0">1</span>
+$ ./configure --<span class="re2">prefix=</span>/usr
+$ make
+$ make install <span class="co1"># this must be done as 'root'</span>
+&nbsp;
+$ make <span class="kw3">test</span> <span class="co1"># if you want the autotest to be executed </span>
+&nbsp;</pre></object>
+</p>
+
+<p>For more information about the installation take a look at the <code>INSTALL</code> file in the tarball.</p>
+
+</blockquote>
+
+<h2><a name="using">VI. Using SStrings</a> <a href="basics.html"><img src="images/top.gif" alt="top" /></a>
+<a href="basics.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+
+<p>You have to include the <code>sstrings2.h</code> in your source code. To link with the GNU GCC you have to use the <code>-lsstrings2</code> option.
+Take a look at <a href="basics.html#helloworld">"Hello World" with SStrings</a>.
+</p>
+
+</blockquote>
+
+</div>
+
+<div id="w3c">
+<a href="http://validator.w3.org/check?uri=referer" title="Validate this page"><img src="images/w3c-xhtml-validation-80x15.jpg" alt="Valid XHTML 1.0 Strict" /></a>
+&nbsp;
+<a href="http://jigsaw.w3.org/css-validator/check/referer" title="Validate this page"><img src="images/w3c-css-validation-80x15.jpg" alt="Valid CSS!" /></a>
+<span class="tiny">
+This document is release under the terms of the GPL-2. Written by Pablo Yanez Trujillo</span>
+</div>
+
+</body>
+</html>

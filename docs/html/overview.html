@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="Author" content="Pablo Yanez Trujillo" />
+<meta name="Audience" content="Alle" />
+<meta name="Expires" content="0" />
+<meta name="Description" content="Safe Strings Library Reference Manual" />
+<meta name="Keywords" content="safe, strings, string, CString, char, char*, safe strings, sstring, C" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="Robots" content="INDEX,FOLLOW" />
+<meta name="Revisit-After" content="5 days" />
+<link rel="stylesheet" href="style/sstrings-styles.css" type="text/css" />
+<link rel="stylesheet" href="style/code.css" type="text/css" />
+<title>Safe Strings Library Reference Manual</title>
+</head>
+<body>
+<div id="content">
+<h1 class="general_title">Safe Strings Library Reference Manual</h1>
+
+<p>Safe Strings library, version 2.0.1<br />
+<a href="index.html" title="Table of contents"><img src="images/up.jpg" alt="Home" /></a>&nbsp;
+<a href="basics.html" title="SStrings Basics"><img src="images/right.jpg" alt="Next" /></a>
+</p>
+
+<h1>1. Safe Strings Overview</h1>
+
+<ol class="roman">
+<li><a href="overview.html#goodfor" title="What is this library good for?">What is this library good for?</a></li>
+<li><a href="overview.html#license" title="License">License</a></li>
+<li><a href="overview.html#whatsnew" title="What is new?">What is new?</a></li>
+<li><a href="overview.html#compiling" title="Compiling the safe Strings library">Compiling the safe Strings library</a></li>
+<li><a href="overview.html#linking" title="How to link">How to link</a></li>
+<li><a href="overview.html#repos" title="Subversion Repository">Subversion Repository</a></li>
+<li><a href="overview.html#developers" title="Main developers">Main developers</a></li>
+<li><a href="overview.html#becomedev" title="How to become a developer">How to become a developer</a></li>
+</ol>
+
+<h2><a name="goodfor">I. What is this library good for?</a> <a href="overview.html"><img src="images/top.gif" alt="top" /></a>
+<a href="overview.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<p>
+Safe Strings is a small C library that handles C strings in a safe way. The functions of this library look at the necessary 
+space for the operations and try to reserve that space (with malloc or realloc). The functions only begin working with 
+their tasks when the memory allocation is successful.
+</p>
+
+<p>
+I was tired having to implement in each project some functions that handle with C Strings in a safe way. It is not always easy when
+you have to use malloc/realloc all the time and you have always to check whether malloc/realloc return NULL or not. C newbies often
+don't know how to use C Strings or don't use malloc/realloc carefully. So that's why I decided to write this small library.
+</p>
+
+<p>
+I was working with sstrings-1.3 for a long time. Then I realised that this library is not so easy to use as I thought first. Then I had
+to work with <a href="http://www.gtk.org/">GTK+</a> and I was very impressed by the 
+<a href="http://developer.gnome.org/doc/API/2.0/glib/glib-Strings.html">GString</a>-object from the GLib. I decided then to rewrite
+sstrings using some ideas from the GLib such as creating a new string object rather than working with pointers to pointer 
+of chars (char**).<br /><span class="note">NOTE:</span> It is important to know that I am not trying to create a clone of the GLib 
+library. SString does not contain code from the GLib nor implements GLib functions, and SString works only with strings.
+</p>
+</blockquote>
+
+<h2><a name="license">II. License</a> <a href="overview.html"><img src="images/top.gif" alt="top" /></a>
+<a href="overview.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<p>
+SStrings is distributed under the terms of the <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License 
+Verison 2 (GPL-2)</a>. SStrings uses <a href="http://www.hpl.hp.com/personal/Hans_Boehm/gc/">The Boehm-Demers-Weiser conservative 
+garbage collector</a>, please take a look at its <a href="http://www.hpl.hp.com/personal/Hans_Boehm/gc/license.txt">license</a>.
+</p>
+</blockquote>
+
+<h2><a name="whatsnew">III. What is new?</a> <a href="overview.html"><img src="images/top.gif" alt="top" /></a>
+<a href="overview.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<ul>
+<li>The version 2.0.1 is the first version of sstrings which implements a string object.</li>
+<li>A garbage collector can be used if you don't want to free the memory by yourself.</li>
+</ul>
+</blockquote>
+
+<h2><a name="compiling">IV. Compiling the safe Strings library</a> <a href="overview.html"><img src="images/top.gif" alt="top" /></a>
+<a href="overview.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<p>
+Download the latest sources from <a href="http://klingsor.informatik.uni-freiburg.de/projects/sstrings">
+http://klingsor.informatik.uni-freiburg.de/projects/sstrings</a><br />
+You need <a href="http://www.hpl.hp.com/personal/Hans_Boehm/gc/">The Boehm-Demers-Weiser conservative garbage collector</a>
+</p>
+
+<p>
+SString is mainly developed with a Pentium 4 computer running <a href="http://www.gentoo.org/">Gentoo Linux</a> with GCC 3.4.4, hence
+I don't know if sstrings can be compiled with older version of GCC. Execute following code from a shell:
+</p>
+
+<p class="code">
+<span class="title">BASH: command line</span>
+<object>
+<pre class="bash_highlight_geshi_code">$ tar xjpf sstrings-<span class="nu0">2</span>.<span class="nu0">0</span>.<span class="nu0">1</span>.tar.bz2
+$ <span class="kw3">cd</span> sstrings-<span class="nu0">2</span>.<span class="nu0">0</span>.<span class="nu0">1</span>
+<span class="co1"># installing withou testing</span>
+$ ./configure --<span class="re2">prefix=</span>/usr &amp;&amp; make &amp;&amp; make install
+<span class="co1"># type 'make test' for a test of the library</span></pre></object>
+</p>
+
+</blockquote>
+
+<h2><a name="linking">V. How to link</a> <a href="overview.html"><img src="images/top.gif" alt="top" /></a>
+<a href="overview.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+
+<p>
+The GCC Linker needs the <b><code>-lsstrings2</code></b> option. Please see: <a href="basics.html#helloworld">&quot;Hello
+World&quot; with SStrings</a>
+</p>
+</blockquote>
+
+<h2><a name="repos">VI. Subversion Repository</a> <a href="overview.html"><img src="images/top.gif" alt="top" /></a>
+<a href="overview.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<p>
+You can download a daily snapshot of the sources from our <a 
+href="http://klingsor.informatik.uni-freiburg.de/websvn/listing.php?repname=sstrings&amp;path=%2F&amp;rev=0&amp;sc=1">
+repository</a>. You can use the <b><code>svn</code></b> tool, too. You will only have read-rights. If you want to to get write-rights
+then read this: <a href="overview.html#becomedev">How to become a developer</a>.
+</p>
+
+<table>
+<tr>
+  <td><b>User:</b></td>
+  <td>guest</td>
+</tr>
+<tr>
+  <td><b>Password:</b></td>
+  <td>Just press ENTER (no password)</td>
+</tr>
+</table>
+
+<p class="code">
+<span class="title">BASH: command line</span>
+<object>
+<pre>$ svn co --username guest https://klingsor.informatik.uni-freiburg.de/svn/sstrings
+Authentication realm: &lt;https://klingsor.informatik.uni-freiburg.de:443&gt; sstrings repository
+Password for 'guest': 
+A  sstrings/trunk
+A  sstrings/trunk/mkinstalldirs
+A  sstrings/trunk/AUTHORS
+A  sstrings/trunk/depcomp
+A  sstrings/trunk/ChangeLog
+...</pre></object>
+</p>
+
+<p><span class="note">Note:</span> Do not forget to execute (twice) the <b><code>autogen.sh</code></b> script before you compile the 
+library.</p>
+
+<p><span class="note">Note:</span> You have to accept the authenticity certificate from the server</p>
+
+<p class="code">
+<span class="title">Certificate information from https://klingsor.informatik.uni-freiburg.de</span>
+<object>
+<pre>
+Certificate information:
+ - Hostname: klingsor.informatik.uni-freiburg.de
+ - Valid: from Nov  6 01:59:09 2005 GMT until Nov  6 01:59:09 2007 GMT
+ - Issuer: Poolmgr, Poolmgr, Freiburg, Baden-Wuerttenberg, DE
+ - Fingerprint: f9:25:db:d4:b5:5a:1f:af:fc:f6:83:af:0b:96:e9:7c:8a:67:9b:03
+</pre>
+</object>
+</p>
+
+</blockquote>
+
+<h2><a name="developers">VII. Main developers</a> <a href="overview.html"><img src="images/top.gif" alt="top" /></a>
+<a href="overview.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<p>
+<a href="http://klingsor.informatik.uni-freiburg.de">Pablo Y&aacute;nez Trujillo (<i>supertux</i>)</a> yanezp
+<i><span>at</span></i>
+informatik.uni-freiburg.de<br />
+Cong Wang (<i>cong</i>) xiyou.wangcong
+<i><span>at</span></i>
+gmail.com
+</p>
+</blockquote>
+
+
+<h2><a name="becomedev">VIII. How to become a developer</a> <a href="overview.html"><img src="images/top.gif" alt="top" /></a>
+<a href="overview.html"><span class="htiny">Top</span></a></h2>
+
+<blockquote>
+<p>
+Everybody can join the developers team. You only have to know how to write ANSI C code. Please send me an email to yanezp
+<i><span>at</span></i>
+informatik.uni-freiburg.de
+and you will get write access to our repository.
+</p>
+</blockquote>
+
+
+</div>
+
+<div id="w3c">
+<a href="http://validator.w3.org/check?uri=referer" title="Validate this page"><img src="images/w3c-xhtml-validation-80x15.jpg" alt="Valid XHTML 1.0 Strict" /></a>
+&nbsp;
+<a href="http://jigsaw.w3.org/css-validator/check/referer" title="Validate this page"><img src="images/w3c-css-validation-80x15.jpg" alt="Valid CSS!" /></a>
+<span class="tiny">
+This document is release under the terms of the GPL-2. Written by Pablo Yanez Trujillo</span>
+</div>
+
+</body>
+</html>

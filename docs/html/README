@@ -1,0 +1,12 @@
+Creating html documentation
+---------------------------
+
+1. This file is only present in the repository sources!
+
+2. The html documentation must be written in "Valid XHTML 1.0 Strict"
+   If you don't know how to create such XHTML code, first read
+   	
+	http://www.w3.org/TR/xhtml1
+
+   and if you still don't know how to make it, then don't write html code :)
+   
