@@ -1,0 +1,63 @@
+.\" Copyright 1993 David Metcalfe (david@prism.demon.co.uk)
+.\"
+.\" Permission is granted to make and distribute verbatim copies of this
+.\" manual provided the copyright notice and this permission notice are
+.\" preserved on all copies.
+.\"
+.\" Permission is granted to copy and distribute modified versions of this
+.\" manual under the conditions for verbatim copying, provided that the
+.\" entire resulting derived work is distributed under the terms of a
+.\" permission notice identical to this one.
+.\" 
+.\" Since the Linux kernel and libraries are constantly changing, this
+.\" manual page may be incorrect or out-of-date.  The author(s) assume no
+.\" responsibility for errors or omissions, or for damages resulting from
+.\" the use of the information contained herein.  The author(s) may not
+.\" have taken the same level of care in the production of this manual,
+.\" which is licensed free of charge, as they might when working
+.\" professionally.
+.\" 
+.\" Formatted or processed versions of this manual, if unaccompanied by
+.\" the source, must acknowledge the copyright and authors of this work.
+.\"
+.\" References consulted:
+.\"     Linux libc source code
+.\"     Lewine's _POSIX Programmer's Guide_ (O'Reilly & Associates, 1991)
+.\"     386BSD man pages
+.\" Modified Sat Jul 24 17:56:43 1993 by Rik Faith (faith@cs.unc.edu)
+.\" Added history, aeb, 980113.
+.\"
+.\" NOTE: This function wasn't written by GNU. I only use this manual page fpr
+.\" documentate this function because of the similarity to strstr- In fact
+.\" I wanted to create a function that behaves the same way. For more informations
+.\" about GNU visit http://www.gnu.org
+.TH "STRRSTR" "3" "Februar 2005" "Version 0.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.SH NAME
+strrstr \- locate a substring
+.SH SYNOPSIS
+.nf
+.B #include <string.h>
+.sp
+.BI "char* strrstr(const char* " haystack ", const char* " needle );
+.fi
+.SH DESCRIPTION
+The \fBstrstr()\fP function finds the last occurrence of the substring
+\fIneedle\fP in the string \fIhaystack\fP.  The terminating `\\0'
+characters are not compared.
+.SH "RETURN VALUE"
+The \fBstrstr()\fP function returns a pointer to the beginning of the
+substring, or NULL if the substring is not found or one of \fIhaystack\fR and \fIneedle\fR
+is NULL.
+.SH BUGS
+I don't know about any bugs. But I would be very happy to know one if you find one. Please report bugs at
+pabloy@pcpool.mathematik.uni-freiburg.de
+.SH "SEE ALSO"
+.BR index (3),
+.BR memchr (3),
+.BR rindex (3),
+.BR strchr (3),
+.BR strpbrk (3),
+.BR strsep (3),
+.BR strspn (3),
+.BR strtok (3)
+

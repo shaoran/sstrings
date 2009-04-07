@@ -1,0 +1,90 @@
+.\" Copyright 2005 by Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de
+.\" The safe Strings Library Version 0.0.1
+.\" 
+.\" This is free software. Please read the file ../COPYING if you
+.\" want to use/edit/distribuite this source file.
+.\" This source file is protected by the GNU GPL-2
+.\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
+.\" FITNESS FOR A PARTICULAR PURPOSE.
+.TH "SSTRTRIM" "3" "Februar 2005" "Version 0.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.SH "NAME"
+sstrtrim, sstrltrim, sstrrtrim, trim, ltrim, rtrim - cut blank spaces from strings
+.SH "SYNOPSIS"
+.B #include <sstrings.h>
+.sp
+.BI "char *sstrtrim(char **"buffer ");"
+.br
+.BI "char *sstrltrim(char **"buffer ");"
+.br
+.BI "char *sstrrtrim(char **"buffer ");"
+
+.BI "char *trim(char *"buffer ");"
+.br
+.BI "char *ltrim(char *"buffer ");"
+.br
+.BI "char *rtrim(char *"buffer ");"
+.SH "DESCRIPTION"
+The three first functions take the adress of a "safe string" by \fIbuffer\fR and cut the blank spaces. They return a pointer to
+the the resized memory pointed by \fI*buffer\fR. \fBsstrltrim\fR cuts all left blank characters, 
+\fBsstrrtrim\fR cuts all right blank characters, and \fBsstrtrim\fR cuts all left and right blank characters. If \fI*buffer\fR is
+NULL then NULL is returned and ss_errno is set to SS_NULL_TRIM.
+
+The three last functions do the same, but they don't reallocate memory space and/or move the content.
+\fBltrim\fR cuts all left blank characters, \fBrtrim\fR cuts all right blank characters and
+\fBtrim\fR cuts all left and right blank characters. When you use \fBtrim\fR and \fBrtrim\fR you must take care about the
+buffer you pass with \fIbuffer\fR. The functions has to be able to write in the buffer, otherwise a segmentation fault ist generated.
+Note that
+
+.RS
+.nf
+	char* y = "hello        ";
+	char* x = rtrim("hello        "); /* or trim instead of rtrim. HERE segmentation fault */
+	char* z = rtrim(y); /* or trim instead of rtrim. HERE segmentation fault */
+.fi
+.RE
+
+generates a segmentation fault, because \fBtrim\fR and \fBrtrim\fR aren't able to write/move the \\0 character when cutting right
+blank spaces. But this code does not generate a segmentation fault:
+
+.RS
+.nf
+	char y[] = "hello        ";
+	char* x = rtrim(y); /* or trim instead of rtrim */
+.fi
+.RE
+
+When using \fBltrim\fR you may pass a read-only buffer, beacuse \fBltrim\fR returns the pointer to the first not-blank character of
+\fIbuffer\fR. Note that it is not a good style passing read-only buffer to \fBltrim\fR, it would be better if you try not to pass
+read-only buffers.
+.SS "Returning values"
+A pointer to the new resized memory (in case of the three first functions) or a pointer to the next not-blank character.
+.SS "Blank Charachters"
+Blank Characters are prooved by \fBisspace\fR(3). \fBispace()\fR checks for white-space characters.  In the
+.B """C"""
+and
+.B """POSIX"""
+locales, these are: space, form-feed
+.RB ( '\ef' ),
+newline
+.RB ( '\en' ),
+carriage return
+.RB ( '\er' ),
+horizontal tab
+.RB ( '\et' ),
+and vertical tab
+.RB ( '\ev' ). \"Thank you, /usr/share/man/man3/isalpha.3.gz
+.SH "NOTES"
+You should always proofe that the functions doesn't return NULL. \fIss_errno\fR is declared in the libraray and doesn't need to
+be declared by yourself, just use it. Like errno from errno.h you must se it to SS_NO_ERROR by yourself (when SS_NO_ERROR is a posible
+value when the returning pointer is NULL).
+
+You must always free you buffers by yourself, don't forget it!
+
+Read \fBsstrings\fR(5) for a list of the constants.
+.SH "BUGS"
+I don't know about any bugs. But I would be very happy to know one if you find one. Please report bugs at
+pabloy@pcpool.mathematik.uni-freiburg.de
+.SH "SEE ALSO"
+.BR delsstr (3)
+.BR cutsstr (3)
+.BR cutrsstr (3)

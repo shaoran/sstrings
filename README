@@ -1,0 +1,30 @@
+This project is written in German, because this project is made for a german university.
+The next lines in the README file will be written in German.
+
+=======================================================================================
+
+
+1. Was ist turmach?
+===================
+
+turmach steht für "Turing Maschine" und ist eine für UNIX-Like Systeme Turing Maschine
+Emulation. Das Projekt wird eigentlich mit reinem ANSI C (nach Standard C99). Es ist
+tatsächlich portabel, man kann theoretisch unter jeden System kompilieren, welches
+über einen ANSI C Compiler verfügt. Das einzige Problem wäre, dass turmach 
+XLibs benutzt und XLibs ist nur unter UNIX-Like Systeme verfügbar.
+
+Es handelt sich um ein Open Source Projekt, das heißt, jeder darf mitmachen. Und wenn
+es jemanden gibt, der eine Extra Version schreibt, welche andere graphische Librerien wie
+OpenGL, oder QT benutzt, dann bedanke ich mich. Ich schreibe das Projekt unter Linux und 
+wird unter Linux, Solaris und FreeBSD getestet. Es wird keine Windows Portabilität
+gewährleistet, denn ich HABE ABSOLUT KEINE LUST, FÜR WINDOF ZU PROGRAMMIEREN.
+
+2. Warum turmach?
+=================
+
+Ich bin Informatik-Mathematik Student an der Universität Freiburg und habe bereits die
+Vorlesung Informatik III (Theoretische Informatik) hinter mir und das Thema, das mir
+am meisten gefallen hat, war Turing Maschine.
+
+Da wir ab und zu Turing Maschine definieren mussten und ich niergends sie testen konnte,
+beschloss ich meine eigene Emulation zu schreiben.

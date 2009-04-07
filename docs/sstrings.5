@@ -1,0 +1,126 @@
+.\" Copyright 2005 by Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de
+.\" The safe Strings Library Version 0.0.1
+.\" 
+.\" This is free software. Please read the file ../COPYING if you
+.\" want to use/edit/distribuite this source file.
+.\" This source file is protected by the GNU GPL-2
+.\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
+.\" FITNESS FOR A PARTICULAR PURPOSE.
+.TH "sstrings" "5" "Februar 2005" "Version 0.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.SH "SINOPSYS"
+The
+.B Safe Strings Libraray
+is a simple collection of C functions that handle with strings in a safe way.
+All function were written with ANSI C (C99) functions are were tested before
+this current release was made, but this doesn't mean that all function are bug free.
+So, if you find erros and bugs, please tell me about them at pabloy@pcpool.mathematik.uni-freiburg.de
+
+I use the name \fBSafe Strings\fR because the functions allocate and reallocate only the needed space, 
+each time before writting, expanding or cutting the memory those functions proof that there is enough 
+space to execute they jobs. So you don't need (as programmer) to take care about this, because this 
+is silly work when working with C String.
+
+This function should be used only with C. C++ has std::string and std::string should be used there, so don't use
+this funtion with C++.
+.SH "PROGRAMMING WITH SSTRINGS"
+Before you begin porgramming with this library you should know this:
+.LP
+.TP
+.BR "How to use this libraray"
+You may use these functions as a library (shared or static) or you can add the whole source code to your projects.
+The code is released under the term of the GPL-2.
+
+.LP
+.BR "Writing code and including source files"
+The only thing you need to access the library, is to include \fIsstrings.h\fR into your source files. Note that you
+don't need to include \fIstdio.h\fR, \fIstdlib.h\fR and \fIctype.h\fR because they are included in \fIsstrings.h\fR.
+
+You must call \fIfree(3)\fR with each variable that is used as a pointer of any result of one of sstrings functions.
+For example:
+
+.RS
+.nf
+	/* sourcecode: helloworld.c */
+
+	#include <sstrings.h>
+	#include <stdio.h>
+
+	int main(void)
+	{
+		char* x = "Hello";
+		char y[] = "World!";
+		char* helloworld = NULL;
+
+		helloworld = appendstring(&helloworld, x); /* assume everything goes right, this is so */
+		helloworld = appendstring(&helloworld, " "); /* a dirty code */
+		helloworld = appendstring(&helloworld, y);
+
+		printf("%s\\n", helloworld); /* output: Hello World */
+		
+		/* you don't need top free x and y, but helloworld */
+
+		free(helloworld); /* YOU MUST DO THIS BY YOURSELF */
+
+		return 0;
+	}
+.fi
+.RE
+.LP
+.BR "Linking source code with sstrings"
+Use this -lsstrings option to link this library. Example:
+
+\&	$ gcc -ohelloworld -lsstrings helloworld.c
+
+.SH "BUGS"
+I din't find any bugs at all, please send me a bug report at pabloy@pcpool.mathematik.uni-freiburg.de
+if you find one. Thank you
+
+.SH "ERROR CONSTANTS"
+When the functions return NULL the variable \fIss_errno\fR is set to a error constant. In each man page of the functions
+is explained which values every function may generate. Following table shows the different error constants.
+
+.RS
+.nf
+ 
+	List of error constants
+
+	Name              || value || Description
+	=========================================
+	\fBSS_NO_ERROR\fR          0        describes the state of no error
+	\fBSS_NO_MEM\fR            1        cannot execute malloc because of the memory
+	\fBSS_NO_EXPAND\fR         2        cannot execute realloc and expand the buffer
+	\fBSS_NULL_BUFFER\fR       3        you passed a NULL buffer, when a string is required
+	                              or a not NULL pointer is required
+	\fBSS_NEEDLE_NOT_FOUND\fR  4        when the needle is not found (reasons: empty needle or
+	                              the needle is really not found)
+	\fBSS_NULL_TRIM\fR         5        *buffer in trim sstr*trim function is NULL. Cannot trim 
+	                              anything
+
+.fi
+.RE
+.SH "FUNCTIONS"
+I don't want to explain here the functions. Please see the \fBSEE ALSO\fR section, there are all functions listed, you can see
+the manual page for each function.
+
+For more information and documentation visit http://pcpool.mathematik.uni-freiburg.de~/pabloy/projects/sstrings
+
+.SH "SEE ALSO"
+.BR addchar (3)
+.BR appendstring (3)
+.BR appendnstring (3)
+.BR stringappend (3)
+.BR stringnappend (3)
+.BR str2sstr (3)
+.BR subsstr (3)
+.BR strrstr (3)
+.BR substr (3)
+.BR subrstr (3)
+.BR delsstr (3)
+.BR cutsstr (3)
+.BR cutrsstr (3)
+.BR ltrim (3)
+.BR rtrim (3)
+.BR trim (3)
+.BR sstrltrim (3)
+.BR sstrrtrim (3)
+.BR sstrtrim (3)
