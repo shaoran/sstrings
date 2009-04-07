@@ -44,7 +44,7 @@ extern short ss_errno;
 #define SS_NULL_BUFFER 3
 #define SS_NEEDLE_NOT_FOUND 4
 #define SS_NULL_TRIM 5
-#define SS_UNEXPECTED 6
+#define SS_EMPTY_STR 6
 
 /**
  * You have always to set ss_errno to 0 or SS_NO_ERROR by yourself,
@@ -66,6 +66,8 @@ extern short ss_errno;
  * 				 the needle is really not found)
  * SS_NULL_TRIM		5	 *buffer in trim sstr*trim function is NULL. Cannot trim 
  * 				 anything
+ * SS_EMPTY_STR		6	 When a buffer contains an empty string and it shouldn't
+ * 				 be empty.
  * 
  **/
 

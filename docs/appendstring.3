@@ -6,7 +6,7 @@
 .\" This source file is protected by the GNU GPL-2
 .\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
 .\" FITNESS FOR A PARTICULAR PURPOSE.
-.TH "APPENDSTRING" "3" "Februar 2005" "Version 0.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.TH "APPENDSTRING" "3" "March 2005" "Version 0.0.2" "Linux Programmer's Manual -- Safe Strings Library"
 .SH "NAME"
 appendstring, appendnstring, stringappend, stringnappend - appending strings to safe strings
 .SH "SYNOPSIS"
@@ -24,7 +24,7 @@ These functions append strings to "safe strings", it means then took the adress 
 was allocated with malloc/realloc and try to make this space bigger and concatenate the string.
 
 If \fI*buffer\fR is a NULL pointer then necessary new space is allocated (with malloc) and the content of \fIstring\fR is
-copied into this new allocated space. Id \f*buffer\fR is not NULL then these functions try to make the allocated necessary space
+copied into this new allocated space. Id \fI*buffer\fR is not NULL then these functions try to make the allocated necessary space
 bigger and then concatenate the string passed with \fIstring\fR. \fIstring\fR must be a 0-terminated string. \fBappendstring\fR and
 \fBstringappend\fR are wrapper functions of \fBappendnstring\fR and \fBstringnappend\fR. These functions take a thrird parameter,
 \fIlen\fR tell how many characters (not including the \0 of \fIstring\fR) must be copied. These 4 functions set the \0 bit

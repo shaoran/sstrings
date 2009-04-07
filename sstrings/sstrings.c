@@ -275,7 +275,11 @@ char* subsstr(char** buffer, size_t pos, size_t len)
 
 	buf_len = strlen(*buffer);
 
-	if(!buf_len) return NULL;
+	if(!buf_len) 
+	{
+		ss_errno = SS_EMPTY_STR;
+		return NULL;
+	}
 
 	if(pos > buf_len - 1) pos = buf_len - 1; /* we can make here so
 						    that *buffer is returned instead of
@@ -316,13 +320,14 @@ char* strrstr(const char *haystack, const char *needle)
 		return NULL;
 
 	if(!*haystack && !*needle)
-		return haystack; /* ignore warning */
+		return (char*) &haystack[0]; /* gcc generates a warning */
+				     /* other compiler may not compile this */
 	else if(!*haystack)
 		return NULL;
 	else if(!*needle) 
-		return haystack;
+		return (char*) &haystack[0]; /* the same */
 
-	tmp_old = tmp = haystack;
+	tmp_old = tmp = (char*) &haystack[0]; /* the same */
 	len = strlen(needle);
 
 	counter = 0;
@@ -355,7 +360,6 @@ char* strrstr(const char *haystack, const char *needle)
 char* substr(const char* haystack, const char* needle)
 {
 	char* tmp;
-	size_t len;
 	
 	if(!haystack || !needle)
 	{
@@ -363,7 +367,7 @@ char* substr(const char* haystack, const char* needle)
 		return NULL;
 	}
 
-	if(!*haystack || !*needle)
+	if(!*needle)
 		return str2sstr(haystack);
 
 	tmp = strstr(haystack, needle);

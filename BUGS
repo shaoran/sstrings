@@ -1,0 +1,18 @@
+REPORTING BUGS
+--------------
+
+Please feel free to report any bug and comments @
+pabloy@pcpool.mathematik.uni-freiburg.de
+
+Version 0.0.2
+-------------
+
+I don't know about any bug. If you find one, please report it
+
+Version 0.0.1
+-------------
+
+- subsstr has a bug for some compilers. Compiler like the MS VC++ won't compile
+  this.
+
+- The manual pages have some bugs in the information and some manual pages cannot be opened

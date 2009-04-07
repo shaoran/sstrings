@@ -1,1 +1,7 @@
+For Version >= 0.0.3
 
+Try to implement a more efficient strrstr function
+
+For Version >= 0.0.2
+  - change strsstr [BUG]
+  - chnage manual pages [BUG]

@@ -1,30 +1,50 @@
-This project is written in German, because this project is made for a german university.
-The next lines in the README file will be written in German.
+The Safe String Library
+=======================
 
-=======================================================================================
+Version 0.0.2
+-------------
 
+1. What is sstrings?
+--------------------
 
-1. Was ist turmach?
-===================
+Safe Strings is a small C library that handles C strings in a safe way. 
+The functions of this library look at the necessary space for the operations 
+and try to reserve that space (with malloc or realloc). The functions only 
+begin working with their tasks when the memory allocation is successful.
 
-turmach steht für "Turing Maschine" und ist eine für UNIX-Like Systeme Turing Maschine
-Emulation. Das Projekt wird eigentlich mit reinem ANSI C (nach Standard C99). Es ist
-tatsächlich portabel, man kann theoretisch unter jeden System kompilieren, welches
-über einen ANSI C Compiler verfügt. Das einzige Problem wäre, dass turmach 
-XLibs benutzt und XLibs ist nur unter UNIX-Like Systeme verfügbar.
+2. System specifications
+------------------------
 
-Es handelt sich um ein Open Source Projekt, das heißt, jeder darf mitmachen. Und wenn
-es jemanden gibt, der eine Extra Version schreibt, welche andere graphische Librerien wie
-OpenGL, oder QT benutzt, dann bedanke ich mich. Ich schreibe das Projekt unter Linux und 
-wird unter Linux, Solaris und FreeBSD getestet. Es wird keine Windows Portabilität
-gewährleistet, denn ich HABE ABSOLUT KEINE LUST, FÜR WINDOF ZU PROGRAMMIEREN.
+This library should ne compiled by any ANSI C compiler. The configure
+and Makefile.in files were created by the GNU Build System (autoconf,
+automake, etc) and will function with any POSIX System. Note: if you want
+to create a Windows Library, you have to create you own Makefiles that
+run with the Microsoft Visual Stdio. There is no warranty that this function
+unter Windows.
 
-2. Warum turmach?
-=================
+3. Documentation
+----------------
 
-Ich bin Informatik-Mathematik Student an der Universität Freiburg und habe bereits die
-Vorlesung Informatik III (Theoretische Informatik) hinter mir und das Thema, das mir
-am meisten gefallen hat, war Turing Maschine.
+Once installed you can see the documentation using the man command, each
+function has its own manual page on section 3. There is a manual page
+sstrings(5) on section 5 where you can find general information about
+the library and a the list of functions available.
 
-Da wir ab und zu Turing Maschine definieren mussten und ich niergends sie testen konnte,
-beschloss ich meine eigene Emulation zu schreiben.
+You may visit the homepage http://freshmeat.net/redir/sstrings/56606/url_homepage/sstrings
+and read the online documentation.
+
+4. Using the library
+--------------------
+
+To use the library you have to include the sstrings.h file on any C/C++ program.
+Note that it is better to use this library only with C. C++ has std::string and it
+is a much better idea to use this while programming with C++.
+
+Linking this library with a GNU GCC C compiler must be done by passing the -lsstrings
+option when linking the project.
+
+5. License
+----------
+
+This library is publicated under the term of the GNU General Public License (GPL).
+Please read the license in the same directory, the file is COPYING.

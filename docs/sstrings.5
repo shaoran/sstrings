@@ -6,7 +6,7 @@
 .\" This source file is protected by the GNU GPL-2
 .\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
 .\" FITNESS FOR A PARTICULAR PURPOSE.
-.TH "sstrings" "5" "Februar 2005" "Version 0.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.TH "sstrings" "5" "March 2005" "Version 0.0.2" "Linux Programmer's Manual -- Safe Strings Library"
 .SH "SINOPSYS"
 The
 .B Safe Strings Libraray
@@ -93,8 +93,8 @@ is explained which values every function may generate. Following table shows the
 	                              or a not NULL pointer is required
 	\fBSS_NEEDLE_NOT_FOUND\fR  4        when the needle is not found (reasons: empty needle or
 	                              the needle is really not found)
-	\fBSS_NULL_TRIM\fR         5        *buffer in trim sstr*trim function is NULL. Cannot trim 
-	                              anything
+	\fBSS_NULL_TRIM\fR         5        *buffer in trim sstr*trim function is NULL. Cannot trim anything
+	\fBSS_EMPTY_STR\fR         6        When a buffer contains an empty string and it shouldn't be empty.
 
 .fi
 .RE

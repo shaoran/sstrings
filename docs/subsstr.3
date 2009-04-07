@@ -6,7 +6,7 @@
 .\" This source file is protected by the GNU GPL-2
 .\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
 .\" FITNESS FOR A PARTICULAR PURPOSE.
-.TH "SUBSSTR" "3" "Februar 2005" "Version 0.0.1" "Linux Programmer's Manual -- Safe Strings Library"
+.TH "SUBSSTR" "3" "March 2005" "Version 0.0.2" "Linux Programmer's Manual -- Safe Strings Library"
 .SH "NAME"
 subsstr, substr, subrstr - locate a substring
 .SH "SYNOPSIS"
@@ -24,7 +24,8 @@ This functions locate a substring and return a pointer to the location. \fBsubss
 The content if \fI*buffer\fR is changed, it contains only the substring determinated by \fIpso\fR and \fIlen\fR.
 
 If \fIlen\fR is 0 and \fI*buffer\fR is NULL, then NULL will be returned and ss_errno set to SS_NO_ERROR. If \fIlen\fR is 0 and 
-\fI*buffer\fR is not NULL then \fI*buffer\fR is returned.
+\fI*buffer\fR is not NULL then \fI*buffer\fR is returned. if \fI*buffer\fR is an empty string NULL will be returned and
+ss_errno is set to SS_EMPTY_STR.
 
 \fBsubstr\fR finds the first occurrence of the substring \fIneedle\fR in the string \fIhaysatck\fR and returns a pointer to the
 new allocated memory containing the rest of the string with the substring. The terminating \\0 characters are not compared.
@@ -70,10 +71,13 @@ Read \fBsstrings\fR(5) for a list of the constants.
 
 		if(!tmp)
 		{
-			/* posible values: 1. SS_NO_ERROR, but imposible,
-			   because hello != NULL and len != 0
-			   2. SS_NO_EXPAND */
-			fprintf(stderr, "You don't have enough memory\\n");
+			/* ss_errno may be SS_NULL_BUFFER,
+                           SS_NO_ERROR (when str is NULL and len (12) is 0)
+                           SS_EMPTY_STR when str is an empty string
+
+                           but thos values aren't posible */
+
+                        fprintf(stderr, "An unexpected error was produced\\n");
 			free(hello);
 			return 1;
 		}

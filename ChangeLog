@@ -1,0 +1,21 @@
+# Changelog for sstrings
+# Copyright Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
+# $HEADER: http://pcpool.mathematik.uni-freiburg.de/~pabloy/projects/sstrings/ChangeLog
+
+sstrings-0.0.2:
+
+Fri Mar 11; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
+- Version 0.0.2 is released
+
+- Gentoo Ebuild for Version 2 rewritten
+
+- Gentoo Ebuild added in the tar.gz file
+
+- NEWS, README, BUGS, TODO, configure.ac files were rewritten
+
+- Bugs in the manual pages fixed
+
+- Bugs in char* strrstr(const char *haystack, const char *needle) fixed.
+changed the return type from return haystack to  return (char*)
+&haystack[0]; otherwise it cannot be compiled by other
+compiler like the MS VC++
