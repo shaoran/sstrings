@@ -1,3 +1,8 @@
+Sun Mar 20 00:05:26 CET 2005
+  - A new version was created, 1.0.3. I saw that the 0.0.x series were bad selected, beacause
+    it makes no sense to have a version 0. So I change the version release to 1.0.x. This will be
+    the third release of sstrings and that's why the project becomes 1.0.3
+
 Fri Mar 11 19:54:04 CET 2005
 
   - Version 0.0.2 released

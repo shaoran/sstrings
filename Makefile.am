@@ -1,2 +1,2 @@
-EXTRA_DIST=autogen.sh sstrings-0.0.2.ebuild BUGS
+EXTRA_DIST=autogen.sh sstrings-1.0.3.ebuild BUGS
 SUBDIRS=sstrings docs

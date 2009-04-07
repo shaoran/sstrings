@@ -1,16 +1,18 @@
 .\" Copyright 2005 by Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de
-.\" The safe Strings Library Version 0.0.1
+.\" The safe Strings Library Version 1.0.3
 .\" 
 .\" This is free software. Please read the file ../COPYING if you
 .\" want to use/edit/distribuite this source file.
 .\" This source file is protected by the GNU GPL-2
 .\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
 .\" FITNESS FOR A PARTICULAR PURPOSE.
-.TH "APPENDSTRING" "3" "March 2005" "Version 0.0.2" "Linux Programmer's Manual -- Safe Strings Library"
+.TH "APPENDSTRING" "3" "July 2005" "Version 1.0.3" "Linux Programmer's Manual -- Safe Strings Library"
 .SH "NAME"
 appendstring, appendnstring, stringappend, stringnappend - appending strings to safe strings
 .SH "SYNOPSIS"
 .B #include <sstrings.h>
+
+.B Linking with -lsstrings
 .sp
 .BI "char *appendstring(char **"buffer ", const char *"string ");"
 .br
@@ -38,9 +40,19 @@ empty string (the pointer must not be NULL). If you use \fBappendnstring\fR or \
 These functions return a pointer to the new allocated space which is \fI*buffer\fR. Note that this pointer may change and the content
 of the string pointed by \fI*buffer\fR will change unless the function doesn't generate an error. NULL is returned when an error
 ocurred and \fIss_errno\fR will be set to \fISS_NULL_BUFFER\fR or \fISS_NO_MEM\fI or \fISS_NO_EXPAND\fR.
+.SS "Error values for ss_errno"
+\fBss_errno\fR is set to \fISS_NULL_BUFFER\fR if \fIbuffer\fR or \fIstring\fR are NULL.
+
+\fBss_errno\fR is set to \fISS_NO_MEM\fR when the memory reservation fails and \fIbuffer\fR is an empty string.
+
+\fBss_errno\fR is set to \fISS_NO_EXPAND\fR when the memory reservation fails and \fIbuffer\fR is \fBnot\fR an empty string.
+.SS "Note"
+Avoid using the same variable when you use one of this functions. appendstring(&str, str); will work in most of the cases but if
+realloc changes the adress then you will posibly get a segmentation fault!
+
 .SH "NOTES"
 You should always proofe that the functions doesn't return NULL. \fIss_errno\fR is declared in the libraray and doesn't need to
-be declared by yourself, just use it. Like errno from errno.h you must se it to SS_NO_ERROR by yourself (when SS_NO_ERROR is a posible
+be declared by yourself, just use it. Like errno from errno.h you must set it to SS_NO_ERROR by yourself (when SS_NO_ERROR is a posible
 value when the returning pointer is NULL).
 
 You must always free you buffers by yourself, don't forget it!

@@ -1,0 +1,149 @@
+.\" Copyright 2005 by Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de
+.\" The safe Strings Library Version 1.0.3
+.\" 
+.\" This is free software. Please read the file ../COPYING if you
+.\" want to use/edit/distribuite this source file.
+.\" This source file is protected by the GNU GPL-2
+.\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
+.\" FITNESS FOR A PARTICULAR PURPOSE.
+.TH "REPLACESTRING" "3" "July 2005" "Version 1.0.3" "Linux Programmer's Manual -- Safe Strings Library"
+.SH "NAME"
+replacestring, replacerstring, replacenstring, replacenlaststring, replacernstring, replacernlaststring - replace strings using a search
+pattern
+.SH "SYNOPSIS"
+.B #include <sstrings.h>
+
+.B Linking with -lsstrings
+.sp
+.BI "char *replacestring(char "**buffer ", const char "*haystack ", const char "*needle ");"
+.br
+.BI "char *replacerstring(char "**buffer ", const char "*haystack ", const char "*needle ");"
+.br
+.BI "char *replacenstring(char "**buffer ", const char "*haystack ", const char "*needle ", size_t "len ");"
+.br
+.BI "char *replacenlaststring(char "**buffer ", const char "*haystack ", const char "*needle ", size_t "len ");"
+.br
+.BI "char *replacernstring(char "**buffer ", const char "*haystack ", const char "*needle ", size_t "len ");"
+.br
+.BI "char *replacernlaststring(char "**buffer ", const char "*haystack ", const char "*needle ", size_t "len ");"
+
+.SH "DESCRIPTION"
+This family of functions get a pattern as an argument, search for this and then replace this pattern.
+
+\fBreplacestring\fR searches for the \fBfirst\fR ocurrence of \fIhaystack\fR in \fI*buffer\fR and replaces it with \fIneedle\fR.
+
+\fBreplacerstring\fR searches for the \fBlast\fR ocurrence of \fIhaystack\fR in \fI*buffer\fR and replaces it with \fIneedle\fR.
+
+\fBreplacenstring\fR searches for the \fBfirst\fR ocurrence of \fIhaystack\fR in \fI*buffer\fR and replaces it with the \fBfirst\fR 
+\fIlen\fR characters of \fIneedle\fR.
+
+\fBreplacenlaststring\fR searches for the \fBfirst\fR ocurrence of \fIhaystack\fR in \fI*buffer\fR and replaces it with the \fBlast\fR 
+\fIlen\fR characters of \fIneedle\fR.
+
+\fBreplacernstring\fR searches for the \fBlast\fR ocurrence of \fIhaystack\fR in \fI*buffer\fR and replaces it with the \fBfirst\fR 
+\fIlen\fR characters of \fIneedle\fR.
+
+\fBreplacernlaststring\fR searches for the \fBlast\fR ocurrence of \fIhaystack\fR in \fI*buffer\fR and replaces it with the \fBlast\fR 
+\fIlen\fR characters of \fIneedle\fR.
+
+.SS "Returning value"
+These functions return a pointer to \fI*buffer\fR. NULL will be returned if the operation wasn't successfully or \fIhaystack\fR is not
+found in \fI*buffer\fR.
+
+.SS "Error values for ss_errno"
+\fBss_errno\fR is set to \fISS_NULL_BUFFER\fR if \fIbuffer\fR is NULL or \fIhaystack\fR is NULL or \fIneedle\fR is NULL.
+
+\fBss_errno\fR is set to \fISS_NO_ERROR\fR if \fI*buffer\fR is NULL or \fIlen\fR is zero. In the first case NULL is returned and in the
+second case \fI*buffer\fR is returned.
+
+\fBss_errno\fR is set to \fISS_NEEDLE_NOT_FOUND\fR if \fIhaystack\fR is not found in \fI*buffer\fR.
+
+\fBss_errno\fR is set to \fISS_NO_EXPAND\fR if the new memory space isn't reallocated.
+
+.SH "NOTES"
+You should always proofe that the functions doesn't return NULL. \fIss_errno\fR is declared in the libraray and doesn't need to
+be declared by yourself, just use it. Like errno from errno.h you must set it to SS_NO_ERROR by yourself (when SS_NO_ERROR is a posible
+value when the returning pointer is NULL).
+
+You must always free you buffers by yourself, don't forget it!
+
+Read \fBsstrings\fR(5) for a list of the constants.
+.SH "EXAMPLE"
+.RS
+.nf
+	#include <stdio.h>
+	#include <sstrings.h>
+
+	int main(void)
+	{
+		char* x, *tmp;
+
+		x = str2sstr("Hello, how are you today? What are you doing? What are you watching?");
+
+		if(!x)
+		{
+			fprintf(stderr, "You don't have enough memory\\n");
+			return 1;
+		}
+
+		printf("%s\\n", x);
+
+		tmp = replacestring(&x, "are you", "were they");
+
+		if(!tmp)
+		{
+			fprintf(stderr, "You don't have enough memory\\n");
+			free(x);
+			return 1;
+		}
+
+		if(tmp != x)
+			x = tmp;
+
+		printf("%s\\n", x);
+
+		tmp = replacernlaststring(&x, "are you", "I told you, how were we", 7);
+
+		if(!tmp)
+                {
+                        fprintf(stderr, "You don't have enough memory\\n");
+                        free(x);
+                        return 1;
+                }
+
+                if(tmp != x)
+                        x = tmp;
+
+		printf("%s\\n", x);
+
+		free(x);
+
+		/* output:
+		Hello, how are you today? What are you doing? What are you watching?
+		Hello, how were they today? What are you doing? What are you watching?
+		Hello, how were they today? What are you doing? What were we watching?
+		*/
+		
+		return 0;
+	}
+.fi
+.RE
+
+.SH "BUGS"
+I don't know about any bugs. But I would be very happy to know one if you find one. Please report bugs at
+pabloy@pcpool.mathematik.uni-freiburg.de
+.SH "SEE ALSO"
+.BR replacestring (3)
+.BR replacerstring (3) 
+.BR replacenstring (3) 
+.BR replacenlaststring (3)
+.BR replacernstring (3)
+.BR replacernlaststring (3)
+.BR insertnstring (3)
+.BR insertstring (3)
+.BR insertrnstring (3)
+.BR appendnstring (3)
+.BR appendstring (3)
+.BR stringappend (3)
+.BR stringnappend (3)
+

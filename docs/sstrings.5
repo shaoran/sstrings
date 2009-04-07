@@ -1,12 +1,12 @@
 .\" Copyright 2005 by Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de
-.\" The safe Strings Library Version 0.0.1
+.\" The safe Strings Library Version 1.0.3
 .\" 
 .\" This is free software. Please read the file ../COPYING if you
 .\" want to use/edit/distribuite this source file.
 .\" This source file is protected by the GNU GPL-2
 .\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
 .\" FITNESS FOR A PARTICULAR PURPOSE.
-.TH "sstrings" "5" "March 2005" "Version 0.0.2" "Linux Programmer's Manual -- Safe Strings Library"
+.TH "sstrings" "5" "July 2005" "Version 1.0.3" "Linux Programmer's Manual -- Safe Strings Library"
 .SH "SINOPSYS"
 The
 .B Safe Strings Libraray
@@ -26,12 +26,12 @@ this funtion with C++.
 Before you begin porgramming with this library you should know this:
 .LP
 .TP
-.BR "How to use this libraray"
+.SS "How to use this libraray"
 You may use these functions as a library (shared or static) or you can add the whole source code to your projects.
 The code is released under the term of the GPL-2.
 
 .LP
-.BR "Writing code and including source files"
+.SS "Writing code and including source files"
 The only thing you need to access the library, is to include \fIsstrings.h\fR into your source files. Note that you
 don't need to include \fIstdio.h\fR, \fIstdlib.h\fR and \fIctype.h\fR because they are included in \fIsstrings.h\fR.
 
@@ -67,9 +67,17 @@ For example:
 .RE
 .LP
 .BR "Linking source code with sstrings"
-Use this -lsstrings option to link this library. Example:
+Use \fI-lsstrings\fR to link this library. Example:
 
 \&	$ gcc -ohelloworld -lsstrings helloworld.c
+
+.SS "Online documentation"
+You find an online documentation under 
+
+http://pcpool.mathematik.uni-freiburg.de/~pabloy/projects/sstrings/
+.SS "Note"
+Avoid using the same variable when you use one of this functions. somefunction(&str, str, other parm.); will work in most of the 
+cases but if realloc changes the adress then you will posibly get a segmentation fault!
 
 .SH "BUGS"
 I din't find any bugs at all, please send me a bug report at pabloy@pcpool.mathematik.uni-freiburg.de
@@ -124,3 +132,13 @@ For more information and documentation visit http://pcpool.mathematik.uni-freibu
 .BR sstrltrim (3)
 .BR sstrrtrim (3)
 .BR sstrtrim (3)
+.BR insertstring (3)
+.BR insertnstring (3)
+.BR insertrnstring (3)
+.BR replacestring (3)
+.BR replacerstring (3)
+.BR replacenstring (3)
+.BR replacenlaststring (3)
+.BR replacernstring (3)
+.BR replacernlaststring (3)
+.BR emptystring (3)

@@ -1,16 +1,18 @@
 .\" Copyright 2005 by Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de
-.\" The safe Strings Library Version 0.0.1
+.\" The safe Strings Library Version 1.0.3
 .\" 
 .\" This is free software. Please read the file ../COPYING if you
 .\" want to use/edit/distribuite this source file.
 .\" This source file is protected by the GNU GPL-2
 .\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
 .\" FITNESS FOR A PARTICULAR PURPOSE.
-.TH "STR2SSTR" "3" "March 2005" "Version 0.0.2" "Linux Programmer's Manual -- Safe Strings Library"
+.TH "STR2SSTR" "3" "July 2005" "Version 1.0.3" "Linux Programmer's Manual -- Safe Strings Library"
 .SH "NAME"
 str2sstr - converting strings to "safe strings"
 .SH "SYNOPSIS"
 .B #include <sstrings.h>
+
+.B Linking with -lsstrings
 .sp
 .BI "char *str2sstr(const char *"string ");"
 .SH "DESCRIPTION"
@@ -18,9 +20,14 @@ This function takes a 0-terminated string, allocated the needed space and return
 .SS "Returning value"
 A pointer to the newly allocated space containing a copy of \fIstring\fR. NULL if malloc fails, in this case ss_errno is set
 to SS_NO_MEM.
+.SS "Error values for ss_errno"
+\fBss_errno\fR is set to \fISS_NULL_BUFFER\fR if \fIstring\fR is NULL.
+
+\fBss_errno\fR is set to \fISS_NO_MEM\fR when the memory reservation fails.
+
 .SH "NOTES"
 You should always proofe that the functions doesn't return NULL. \fIss_errno\fR is declared in the libraray and doesn't need to
-be declared by yourself, just use it. Like errno from errno.h you must se it to SS_NO_ERROR by yourself (when SS_NO_ERROR is a posible
+be declared by yourself, just use it. Like errno from errno.h you must set it to SS_NO_ERROR by yourself (when SS_NO_ERROR is a posible
 value when the returning pointer is NULL).
 
 You must always free you buffers by yourself, don't forget it!

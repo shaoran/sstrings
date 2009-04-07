@@ -1,2 +1,2 @@
-man_MANS = addchar.3 appendnstring.3 appendstring.3 cutrsstr.3 cutsstr.3 delsstr.3 ltrim.3 rtrim.3 sstrings.5 sstrltrim.3 sstrrtrim.3 sstrtrim.3 str2sstr.3 stringappend.3 stringnappend.3 strrstr.3 subrstr.3 subsstr.3 substr.3 trim.3
+man_MANS = addchar.3 appendnstring.3 appendstring.3 cutrsstr.3 cutsstr.3 delsstr.3 emptystring.3 insertnstring.3 insertrnstring.3 insertstring.3 ltrim.3 replacenlaststring.3 replacenstring.3 replacernlaststring.3 replacernstring.3 replacerstring.3 replacestring.3 rtrim.3 sstrltrim.3 sstrrtrim.3 sstrtrim.3 str2sstr.3 stringappend.3 stringnappend.3 strrstr.3 subrstr.3 subsstr.3 substr.3 trim.3 sstrings.5 
 EXTRA_DIST = $(man_MANS)

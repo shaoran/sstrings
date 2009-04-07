@@ -31,12 +31,14 @@
 .\" documentate this function because of the similarity to strstr- In fact
 .\" I wanted to create a function that behaves the same way. For more informations
 .\" about GNU visit http://www.gnu.org
-.TH "STRRSTR" "3" "March 2005" "Version 0.0.2" "Linux Programmer's Manual -- Safe Strings Library"
+.TH "STRRSTR" "3" "July 2005" "Version 1.0.3" "Linux Programmer's Manual -- Safe Strings Library"
 .SH NAME
 strrstr \- locate a substring
 .SH SYNOPSIS
 .nf
 .B #include <string.h>
+
+.B Linking with -lsstrings
 .sp
 .BI "char* strrstr(const char* " haystack ", const char* " needle );
 .fi

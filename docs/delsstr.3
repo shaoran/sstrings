@@ -1,16 +1,18 @@
 .\" Copyright 2005 by Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de
-.\" The safe Strings Library Version 0.0.1
+.\" The safe Strings Library Version 1.0.3
 .\" 
 .\" This is free software. Please read the file ../COPYING if you
 .\" want to use/edit/distribuite this source file.
 .\" This source file is protected by the GNU GPL-2
 .\" NOTE: There is NO  warranty; not even for MERCHANTABILITY or 
 .\" FITNESS FOR A PARTICULAR PURPOSE.
-.TH "DELSSTR" "3" "March 2005" "Version 0.0.2" "Linux Programmer's Manual -- Safe Strings Library"
+.TH "DELSSTR" "3" "July 2005" "Version 1.0.3" "Linux Programmer's Manual -- Safe Strings Library"
 .SH "NAMES"
 delsstr, cutsstr, cutrsstr - locate substring and delete it
 .SH "SYNOPSIS
 .B #include <sstrings.h>
+
+.B Linking with -lsstrings
 .sp
 .BI "char *delsstr(char **"buffer ", size_t "pos ", size_t "len ");"
 
@@ -36,9 +38,15 @@ Both functions are wrapper functions of \fBdelsstr\fR.
 .SS "Returning Value"
 The functions return a pointer to new resized memory saved in \fI*buffer\fR. If the substring is not found then NULL is returned and
 ss_errno set to SS_NEEDLE_NOT_FOUND.
+
+.SS "Error values for ss_errno"
+\fBss_errno\fR is set to \fISS_NULL_BUFFER\fR if \fIbuffer\fR or \fIneedle\fR are NULL.
+
+\fBss_errno\fR is set to \fISS_NEEDLE_NOT_FOUND\fR if \fIneedle\fR is not found in \fIbuffer\fR.
+
 .SH "NOTES"
 You should always proofe that the functions doesn't return NULL. \fIss_errno\fR is declared in the libraray and doesn't need to
-be declared by yourself, just use it. Like errno from errno.h you must se it to SS_NO_ERROR by yourself (when SS_NO_ERROR is a posible
+be declared by yourself, just use it. Like errno from errno.h you must set it to SS_NO_ERROR by yourself (when SS_NO_ERROR is a posible
 value when the returning pointer is NULL).
 
 You must always free you buffers by yourself, don't forget it!

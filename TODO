@@ -1,7 +1,20 @@
-For Version >= 0.0.3
+For Version >= 1.0.3
 
-Try to implement a more efficient strrstr function
+  - Try to implement a more efficient strrstr function
+
+  - int sprintf(char *str, const char *format, ...);
+    ssprintf(char** buffer,, const char* format, ...); /* not as complicated as sprintf
+
+  - try to add a structure and functions like C++ std::map<char*, void*>
+
+  - try to add functions that insert strings to a "safe string" at some position
+
+  - try to add functions that replace a substring with another substring or by giving its position.
+
+  - when functions like insertstring get a NULL string to be inserted, then return *buffer
+
+
 
 For Version >= 0.0.2
-  - change strsstr [BUG]
-  - chnage manual pages [BUG]
+  - change strsstr [BUG] [done v.0.0.2]
+  - chnage manual pages [BUG] [done v.0.0.2]

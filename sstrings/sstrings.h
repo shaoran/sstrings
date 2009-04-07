@@ -347,4 +347,113 @@ char* sstrtrim(char** buffer);
  **/
 
 
+
+
+
+
+
+
+
+
+
+/* functions added in the 1.0.3 version */
+
+
+char* insertstring(char** buffer, const char* src, size_t pos);
+
+/**
+ * This function inserts the string src into *buffer at position pos.
+ * When src is NULL the function does anything. 
+ *
+ * The function returns a pointer to *buffer, that may change when the space is reallocated
+ **/
+
+char* insertnstring(char** buffer, const char* src, size_t pos, size_t len);
+
+/**
+ * This functions works like insertstring, but it inserts only the first len 
+ * characters of src.
+ *
+ **/
+
+char* insertrnstring(char** buffer, const char* src, size_t pos, size_t len);
+
+/**
+ * This functions works like insertstring, but it inserts only the last len 
+ * characters of src.
+ *  
+ **/
+
+char* replacestring(char** buffer, const char* haystack, const char* needle);
+
+/**
+ * searches for the first occurrence of haystack in *buffer and replaces with needle.
+ * When haystack, needle of *buffer are NULL or empty strings, then nothing will be done
+ *
+ * The functions returns a pointer to *buffer.
+ *
+ **/
+
+char* replacerstring(char** buffer, const char* haystack, const char* needle);
+
+/**
+ * searches for the last occurrence of haystack in *buffer and replaces with needle.
+ * When haystack, needle of *buffer are NULL or empty strings, then nothing will be done
+ *
+ * The functions returns a pointer to *buffer.
+ *
+ **/
+
+char* replacenstring(char** buffer, const char* haystack, const char* needle, size_t len);
+
+/**
+ * searches for the first occurrence of haystack in *buffer and replaces with the first len characters of needle.
+ * When haystack, needle of *buffer are NULL or empty strings, then nothing will be done
+ *
+ * he functions returns a pointer to *buffer.
+ *
+ **/
+
+char* replacenlaststring(char** buffer, const char* haystack, const char* needle, size_t len);
+
+/**
+ * searches for the first occurrence of haystack in *buffer and replaces with the last len characters of needle.
+ * When haystack, needle of *buffer are NULL or empty strings, then nothing will be done
+ *
+ * he functions returns a pointer to *buffer.
+ *
+ **/
+
+char* replacernstring(char** buffer, const char* haystack, const char* needle, size_t len);
+
+/**
+ * searches for the last occurrence of haystack in *buffer and replaces with the first len characters of needle.
+ * When haystack, needle of *buffer are NULL or empty strings, then nothing will be done
+ *
+ * he functions returns a pointer to *buffer.
+ *
+ **/
+
+char* replacernlaststring(char** buffer, const char* haystack, const char* needle, size_t len);
+
+/**
+ * searches for the last occurrence of haystack in *buffer and replaces with the last len characters of needle.
+ * When haystack, needle of *buffer are NULL or empty strings, then nothing will be done
+ *
+ * he functions returns a pointer to *buffer.
+ *
+ **/
+
+/* here some couple of functions that may be useful when reading config files and so on */
+
+int emptystring(const char* src);
+/**
+ * This function checks whether src an empty string is or not. In the first case it returns 1, 0 otherwise
+ *
+ * An empty line is a line that matches to "" or any string that only has 
+ * blank characters (they are prooved by isspace(3))
+ *
+ **/
+
+
 #endif
