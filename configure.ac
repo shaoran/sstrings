@@ -2,7 +2,7 @@ AC_PREREQ(2.59)
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(sstrings/sstrings.c)
 dnl Setting Package name for automake
-AM_INIT_AUTOMAKE(sstrings,1.0.3)
+AM_INIT_AUTOMAKE(sstrings,1.0.4)
 
 dnl Package name
 GENERIC_LIBRARY_NAME=sstrings

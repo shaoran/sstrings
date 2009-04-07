@@ -2,11 +2,18 @@
 # Copyright Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
 # $HEADER: http://pcpool.mathematik.uni-freiburg.de/~pabloy/projects/sstrings/ChangeLog
 
-sstring-1.0.3:
-Tue Jul 12; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
+Wed Jul 13 2005; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
+- Version 1.0.4 started
+
+Wed Jul 20 2005; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
+- bug fixed from delsstr
+- new version released
+
+sstrings-1.0.3:
+Tue Jul 12 2005; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
 - Gentoo ebuild should now installed under sys-libs
 
-Mon Jul 11; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
+Mon Jul 11 2005; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
 - Version 1.0.3 is released
 
 - Gentoo Ebuild for Version 1.0.3 rewritten
@@ -19,7 +26,7 @@ Mon Jul 11; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
 
 sstrings-0.0.2:
 
-Fri Mar 11; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
+Fri Mar 11 2005; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
 - Version 0.0.2 is released
 
 - Gentoo Ebuild for Version 2 rewritten

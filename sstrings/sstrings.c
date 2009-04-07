@@ -481,7 +481,7 @@ char* delsstr(char** buffer, size_t pos, size_t len)
 	{
 		/* cut the 'len' last characters. */
 		tmp = *buffer;
-		tmp[strlen(tmp) - 1 - len] = 0;
+		tmp[strlen(tmp) - len] = 0;
 		return *buffer;
 	}
 
@@ -489,8 +489,9 @@ char* delsstr(char** buffer, size_t pos, size_t len)
 
 	/* set 0 */
 	tmp = *buffer;
-	tmp[pos + str_len] = 0;
 
+	tmp[pos + str_len] = 0;
+	
 	str_len = strlen(tmp);
 
 	tmp = realloc(*buffer, str_len + 1);

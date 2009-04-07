@@ -3,7 +3,7 @@ For Version >= 1.0.3
   - Try to implement a more efficient strrstr function
 
   - int sprintf(char *str, const char *format, ...);
-    ssprintf(char** buffer,, const char* format, ...); /* not as complicated as sprintf
+    ssprintf(char** buffer, const char* format, ...); /* not as complicated as sprintf
 
   - try to add a structure and functions like C++ std::map<char*, void*>
 
