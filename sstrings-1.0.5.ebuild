@@ -10,7 +10,7 @@ SRC_URI="http://pcpool.mathematik.uni-freiburg.de/~pabloy/projects/sstrings/${P}
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86" #I did't tested it on other architectures, I think it works on
+KEYWORDS="~x86" #I did't tested it on other architectures, I think it works on
 #other arc. well
 IUSE=""
 

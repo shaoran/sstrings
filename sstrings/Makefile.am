@@ -1,3 +1,4 @@
+SUBDIRS = test
 sourcefiles=sstrings.c
 headerfiles=sstrings.h
 

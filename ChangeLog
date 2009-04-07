@@ -2,6 +2,19 @@
 # Copyright Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
 # $HEADER: http://pcpool.mathematik.uni-freiburg.de/~pabloy/projects/sstrings/ChangeLog
 
+sstrings-1.0.5:
+Sat Oct 8 2005; Pablo Yanez Trujillo
+<pabloy@pcpool.mathematik.uni-freiburg.de>
+- test directory for `make check` added
+
+Sat Oct 8 2005; Pablo Yanez Trujillo
+<pabloy@pcpool.mathematik.uni-freiburg.de>
+- Version 1.0.5 started
+
+sstrings-1.0.4:
+Sat Oct 8 2005; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
+- test directory for `make check` added
+
 Wed Jul 13 2005; Pablo Yanez Trujillo <pabloy@pcpool.mathematik.uni-freiburg.de>
 - Version 1.0.4 started
 

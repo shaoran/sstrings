@@ -2,7 +2,7 @@ AC_PREREQ(2.59)
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(sstrings/sstrings.c)
 dnl Setting Package name for automake
-AM_INIT_AUTOMAKE(sstrings,1.0.4)
+AM_INIT_AUTOMAKE(sstrings,1.0.5)
 
 dnl Package name
 GENERIC_LIBRARY_NAME=sstrings
@@ -29,7 +29,7 @@ dnl Checks for library functions.
 AC_PROG_INSTALL
 dnl AC_SUBST(RANLIB)
 
-AC_OUTPUT(Makefile sstrings/Makefile docs/Makefile)
+AC_OUTPUT(Makefile sstrings/Makefile sstrings/test/Makefile docs/Makefile)
 
 cat << EOF
 
