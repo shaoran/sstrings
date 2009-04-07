@@ -6,8 +6,8 @@ headerfiles=$(installheaderfile) ss_gc.h
 lib_LTLIBRARIES=libsstrings2.la
 libsstrings2_la_SOURCES=$(sourcefiles) $(headerfiles)
 
-# compile with all string warnings
-AM_CFLAGS=-Wall -Wwrite-strings
+# before we generate a package, delete "-ansi --std=c99"
+AM_CFLAGS=-ansi -std=c99 -Wall -Wwrite-strings
 
 library_includedir=$(includedir)
 library_include_HEADERS = $(installheaderfile)

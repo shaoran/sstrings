@@ -2,7 +2,7 @@ AC_PREREQ(2.59)
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(sstrings/sstrings2.c)
 dnl Setting Package name for automake
-AM_INIT_AUTOMAKE(sstrings,2.0.1)
+AM_INIT_AUTOMAKE(sstrings,2.0.2)
 AM_CONFIG_HEADER(config.h)
 
 dnl Package name

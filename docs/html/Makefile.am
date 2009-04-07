@@ -1,4 +1,4 @@
-HTML_FILES=index.html overview.html basics.html api.html
+HTML_FILES=index.html overview.html basics.html 
 EXTRA_DIST=$(HTML_FILES) funct_html
 SUBDIRS=images style
 

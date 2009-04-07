@@ -1,13 +1,7 @@
 # Changelog for sstrings
 # Copyright Pablo Yanez Trujillo <yanezp@informatik.uni-freiburg.de>
-# $HEADER: http://klingsor.informatik.uni-freiburg.de/projects/sstrings/ChangeLog
 
 sstrings-2.0.1:
-
-Tue Nov 14 2006: Pablo Yanez Trujillo <yanezp@informatik.uni-freiburg.de>
-- man pages done
-- html doc done
-- release 2.0.1
 
 Thu Sep 14 2006: Pablo Yanez Trujillo <yanezp@informatik.uni-freiburg.de>
 - After a long pause I had some time to rewrite some new functions.
