@@ -1,0 +1,12 @@
+Makefile
+autom4te.cache/
+*.o
+*.swp
+tags
+config.*
+.deps/
+.libs/
+*.la
+*.lo
+install-sh
+libtool
