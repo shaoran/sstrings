@@ -43,6 +43,7 @@ is a much better idea to use this while programming with C++.
 Linking this library with a GNU GCC C compiler must be done by passing the -lsstrings
 option when linking the project.
 
+
 5. License
 ----------
 
